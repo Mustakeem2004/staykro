@@ -1,0 +1,225 @@
+.input-group{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+
+.formInput {
+  outline: none;
+  width: 320px;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: border 0.3s ease;
+  align-self:center;
+  padding-left: 10px;
+}
+
+.formInput:focus {
+  border: 1px solid #24a0ed;
+  box-shadow: 0 0 5px rgba(36, 160, 237, 0.4);
+}
+
+.options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 320px;
+}
+
+.signUpBtn {
+  outline: none;
+  width: 320px;
+  background-color: #1d72b8;
+  height: 50px;
+  color: white;
+  font-size: large;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.signUpBtn:hover {
+  background-color: #155d91;
+}
+
+.googleBtn {
+  outline: none;
+  width: 320px;
+  height: 50px;
+  background-color: #fff;
+  color: #333;
+  font-size: large;
+  border-radius: 8px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.googleBtn:hover {
+  background-color: #f5f5f5;
+}
+
+.facebookBtn {
+  outline: none;
+  width: 320px;
+  height: 50px;
+  color: white;
+  background-color: #1877f2;
+  font-size: large;
+  border-radius: 8px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.facebookBtn:hover {
+  background-color: #145db2;
+}
+
+
+.LoginBox{
+   border: 1px solid #e0e0e0;
+   height: 750px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 500px;
+   margin: auto;
+   gap: 20px;
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+   margin-top: 15px;
+   padding-top: 20px;
+   border-radius: 7px;
+}
+
+.forgot{
+  color: rgb(228, 77, 77);
+}
+
+
+
+
+
+@media (max-width:720px) {
+  .LoginBox{
+    width: 400px;
+  }
+  
+  
+  
+}
+
+
+
+
+@media (max-width:500px) {
+  .LoginBox{
+    width: 390px;
+  }
+
+  .facebookBtn{
+    width: 320px;
+  }
+
+  .googleBtn{
+    width: 320px;
+  }
+
+  .signUpBtn{
+    width: 320px;
+  }
+
+ .options{
+  width: 320px;
+  font-size: 15px;
+ }
+
+ .LoginBox h1{
+  font-size: 27px;
+ }
+
+ .formInput{
+  width: 320px;
+ }
+  
+  
+  
+}
+
+
+
+@media (max-width:450px) {
+  .LoginBox{
+    width: 90%;
+  }
+
+  .facebookBtn{
+    width: 85%;
+  }
+
+  .googleBtn{
+    width: 85%;
+  }
+
+  .signUpBtn{
+    width: 85%;
+  }
+  .Outside{
+    width: 100%;
+  }
+  .input-group label{
+    margin-left: 7.5%;
+  }
+
+    .input-group input{
+    width: 85%;
+  }
+
+
+ .options{
+  width: 85%;
+  font-size: 15px;
+ }
+
+ .LoginBox h1{
+  font-size: 27px;
+ }
+
+
+
+
+  
+  
+  
+}
+
+
+
+@media (max-width:400px) {
+   .options{
+  width: 85%;
+  font-size: 13px;
+ }
+  .orWith{
+  font-size: 14px;
+
+ }
+
+}
+
+
+
+

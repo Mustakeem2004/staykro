@@ -1,0 +1,14 @@
+.cardsmall{
+            background-size: cover;
+            background-position: center;
+            width: 300px;
+            height: 200px;
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid black;
+            display: flex;
+            align-items: flex-end;
+            color: white;
+            font-weight: bold;
+
+}

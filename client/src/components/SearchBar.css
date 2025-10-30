@@ -1,0 +1,112 @@
+
+
+
+.input_container {
+    backdrop-filter: blur(2px);  
+    background: rgba(255, 255, 255,0.3);
+    padding: 20px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0,0.2);
+    width: 980px;
+
+}
+
+
+
+
+.card {
+    flex: 1;
+
+    color: black;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.card h4 {
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+.card input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 14px;
+}
+
+.card select{
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 14px;
+
+}
+
+
+.input_container button,
+.input_container input[type="button"] {
+    background: #6c63ff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 600;
+}
+
+.input_container button:hover,
+.input_container input[type="button"]:hover {
+    background: #5848c2;
+} 
+
+
+
+
+
+
+/* Suggestions */
+.suggestions-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: black;
+  color: white;
+  border-radius: 5px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.suggestion-item {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: #333;
+}
+
+
+
+
+
+
+
+
+
+
+

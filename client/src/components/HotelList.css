@@ -1,0 +1,374 @@
+.filterIcon{
+    display: none;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+@media (max-width: 1180px) {
+
+
+    .hotelCard{
+        width: 620px;
+    }
+    .input_container{
+        width: 850px;
+    }
+    .filters-wrapper aside{
+    width: 180px ;
+  }
+
+
+
+  .anchor{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;
+    
+  }
+
+   
+    
+}
+
+@media (max-width: 920px) {
+
+    .input_container{
+        width: 800px;
+    }
+    .filterIcon{
+    display: flex;
+    }
+    .filters-wrapper {
+    display: none;
+  }
+    .filters-wrapper.show {
+    display: flex; /* show when toggled */
+    flex-direction: column;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: white;
+    padding: 10px;
+    z-index: 1000;
+  }
+
+    
+}
+
+@media (max-width: 858px) {
+        .input_container{
+        width: 600px;
+        /* flex-direction: column; */
+        flex-wrap: wrap;
+    }
+        .input_container input{
+        width: 200px;
+
+        
+    }
+
+
+
+}
+
+/* @media (max-width: 746px) {
+        .cardImage{
+            width: 200px;
+        }
+        .hotelCard{
+        width: 520px;
+        }
+        .nameCard{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .cardData h2{
+            font-size: 15px;
+
+        }
+        .cardData p{
+            font-size: 12px;
+
+        }
+
+
+} */
+
+
+@media (max-width: 677px) {
+        .input_container{
+        width: 500px;
+        flex-wrap: wrap;
+    }
+        .cardImage{
+            width: 200px;
+        }
+        .hotelCard{
+        width: 520px;
+        }
+        .nameCard{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .cardData h2{
+            font-size: 15px;
+
+        }
+        .cardData p{
+            font-size: 12px;
+
+        }
+
+
+}
+
+@media (max-width: 580px) {
+
+    .input_container{
+        width: 470px;
+        flex-wrap: wrap;
+        padding: 10px;
+    }
+
+
+            .hotelCard{
+        width: 470px;
+        }
+        .cardImage{
+            width: 180px;
+        }
+                .cardData h2{
+            font-size: 12px;
+            /* line-height: 15px; */
+
+        }
+        .cardData p{
+            font-size: 9px;
+
+        }
+
+}
+
+
+
+@media (max-width: 540px) {
+
+    .input_container{
+        width: 450px;
+        flex-wrap: wrap;
+        padding: 10px;
+        gap: 5px;
+    }
+
+        .input_container button{
+        padding: 10px 15px;
+        font-size: 10px;
+        margin-top: 10px;
+
+    }
+
+
+            .hotelCard{
+        width: 450px;
+        }
+        .cardImage{
+            width: 180px;
+        }
+                .cardData h2{
+            font-size: 12px;
+            /* line-height: 15px; */
+
+        }
+        .cardData p{
+            font-size: 9px;
+
+        }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .input_container{
+        width: 420px;
+        flex-wrap: wrap;
+        padding: 10px;
+        gap: 5px;
+        
+    }
+
+            .input_container input{
+        width: 180px;
+
+        
+    }
+
+        .input_container h4{
+        margin: 8px 0px;
+        
+    }
+
+    .input_container button{
+        padding: 10px 15px;
+        font-size: 10px;
+        margin-top: 10px;
+
+    }
+
+
+            .hotelCard{
+        width: 420px;
+        }
+        .cardImage{
+            width: 180px;
+            
+        }
+                .cardData h2{
+            font-size: 12px;
+            /* line-height: 15px; */
+
+        }
+        .cardData p{
+            font-size: 9px;
+
+        }
+
+}
+
+
+@media (max-width: 470px) {
+
+    .input_container{
+        width: 400px;
+
+        
+    }
+                .input_container input{
+        width: 150px;
+
+        
+    }
+
+
+
+            .hotelCard{
+        width: 400px;
+        }
+        .cardImage{
+            width: 150px;
+        }
+                .cardData h2{
+            font-size: 12px;
+            /* line-height: 15px; */
+
+        }
+        .cardData p{
+            font-size: 9px;
+
+        }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .input_container{
+        width: 380px;
+
+        
+    }
+
+
+
+            .hotelCard{
+        width: 380px;
+        }
+        .cardImage{
+            width: 150px;
+        }
+                .cardData h2{
+            font-size: 12px;
+            /* line-height: 15px; */
+
+        }
+        .cardData p{
+            font-size: 9px;
+
+        }
+
+}
+
+
+
+
+@media (max-width: 427px) {
+           .input_container{
+        width: 350px;
+
+        
+    }
+            .hotelCard{
+        width: 350px;
+        }
+
+        .cardImage{
+            width: 155px;
+            /* height: 110px; */
+        }
+                .cardData h2{
+            font-size: 11px;
+            /* line-height: 15px; */
+
+        }
+        .cardData p{
+            font-size: 9px;
+
+        }
+        .buttonSeeAvailability{
+            padding: 0px;
+            height: 20px;
+            font-size: 10px;
+        }
+
+}
+
+
+@media (max-width: 405px) {
+
+
+                  .input_container{
+        width: 320px;
+
+        
+    }
+
+
+    .input_container input{
+        width: 130px;
+
+        
+    }
+                .hotelCard{
+        width: 320px;
+        }
+
+        .cardImage{
+            width: 125px;
+        }
+
+                        .cardData h2{
+            font-size: 12px;
+            /* line-height: 15px; */
+
+        }
+        .cardData p{
+            font-size: 10px;
+
+        }
+
+}

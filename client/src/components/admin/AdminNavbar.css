@@ -1,0 +1,34 @@
+.adminNavbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0071c2;
+  padding: 10px 20px;
+  color: white;
+}
+
+.adminNavbar .logo h2 {
+  margin: 0;
+}
+
+.adminNavbar .navLinks {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+}
+
+.adminNavbar .navLinks li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.adminNavbar .logoutBtn {
+  background-color: #ff4d4d;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}

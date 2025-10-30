@@ -1,0 +1,106 @@
+.payment-container {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 2rem auto;
+  font-family: "Poppins", sans-serif;
+}
+
+.summary-section,
+.payment-section {
+  flex: 1;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+h2 {
+  margin-bottom: 1rem;
+  /* color: #2b2b2b; */
+}
+
+.summary-card p {
+  margin: 0.5rem 0;
+  color: #444;
+}
+
+.summary-card hr {
+  margin: 1rem 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+.total {
+  font-size: 1.2rem;
+  color: #111;
+}
+
+.method-selector {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.method-selector button {
+  flex: 1;
+  padding: 0.8rem;
+  border: 2px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.method-selector button.active {
+  border-color: #0077ff;
+  background: #e6f1ff;
+  color: #0077ff;
+}
+
+.card-form input,
+.upi-form input {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+}
+
+.pay-btn {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #0077ff, #005dd1);
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pay-btn:hover {
+  transform: scale(1.03);
+  background: linear-gradient(135deg, #005dd1, #0044aa);
+}
+
+@media (max-width: 768px) {
+  .payment-container {
+    flex-direction: column;
+  }
+}
+
+
+.pay-btn:hover {
+  transform: scale(1.03);
+  background: linear-gradient(135deg, #005dd1, #0044aa);
+}
+

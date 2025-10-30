@@ -1,0 +1,431 @@
+@media (max-width: 427px){
+    .Quote_container h1{
+        font-size: 30px
+
+    }
+    .Quote_container p{
+        font-size: 15px
+
+    }
+    .hero_container{
+        width: 100%;
+        height: 450px;
+        border-radius: 0px;
+    }
+
+    .cardsmall{
+        width: 140px;
+        height: 150px;
+    }
+     .TrendingCardHeading h1{
+        text-align: center;
+        font-size: 30px;
+
+     }
+    .TrendingCardHeading p{
+        text-align: center;
+
+     }
+    .TrendingListImg{
+        gap:15px;
+        max-width: 100%;
+        margin: 0px;
+    }
+    
+}
+@media (max-width: 1220px){
+        .cardsmall{
+        width: 230px;
+        /* height: 150px; */
+    }
+
+
+}
+
+@media (max-width: 1095px){
+    /* .input_container{
+        width: 790px;
+
+        
+    } */
+
+    .tripleshow{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background-color: white;       
+        position: fixed;
+        top:0px;
+        left: 0px;
+        width: 180px;
+        height: 100vh;
+        align-items: center;
+        border-right: 2px solid black;
+        transform: translateX(0%);
+        z-index: 100000000000000000000;
+        /* justify-content: center; */
+        
+        
+
+    }
+
+
+
+    .tripleshow::before {
+  content: "";
+  width: 70px;
+  height: 70px;
+  background-image: url("../../assets/bannerimages/mountain.png");
+  background-color: white;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-top: 10px;
+
+}
+
+    .tripleshow a{
+ 
+        text-decoration: none;
+        font-size: 20px;
+        margin-top: 30px;
+        background-color: white;
+        padding: 5px 10px;
+        border-radius: 10px;
+        color: black;
+        display: flex;
+        transition: transform 0.2s ease-in-out;
+        
+    }
+    .tripleshow a.active{
+    background-color: gray;
+  }
+
+        .tripleshow a:hover{
+            
+            scale: 1.1;
+            
+        }
+        
+
+        .tripleshow img{
+            display: flex;
+            transition: all 200;
+        }
+
+
+
+    .triplehide{
+          display: none;
+
+    }
+
+
+
+    .triple{
+        display: flex;
+    }
+
+        .hero_container{
+        width: 100%;
+        border-radius: 0px;
+    }
+
+    .cardsmall{
+        width: 220px;
+        /* height: 150px; */
+    }
+
+
+        .TrendingListImg{
+        max-width: 95%;
+        margin: auto;
+        gap: 20px;
+    }
+
+}
+
+
+
+@media (max-width: 890px){
+        .cardsmall{
+        width: 300px;
+        /* height: 150px; */
+    }
+
+
+    .Quote_container h1{
+    font-size: 40px
+
+    }
+    .Quote_container p{
+        font-size: 18px
+
+    }
+    .hero_container{
+        width: 100%;
+        height: 450px;
+        border-radius: 0px;
+    }
+
+
+
+
+}
+
+
+@media (max-width: 847px){
+            .cardsmall{
+        width: 290px;
+        /* height: 150px; */
+    }
+
+
+            .Quote_container h1{
+        font-size: 35px
+
+    }
+    .Quote_container p{
+        font-size: 17px
+
+    }
+    .hero_container{
+        width: 100%;
+        height: 450px;
+        border-radius: 0px;
+    }
+
+
+}
+
+
+
+@media (max-width: 725px){
+            .cardsmall{
+        width: 270px;
+        /* height: 150px; */
+    }
+
+
+}
+
+
+@media (max-width: 680px){
+            .cardsmall{
+        width: 250px;
+        /* height: 150px; */
+    }
+    .auth_buttons button{
+        margin-left: 3px;
+        font-size: 14px;
+        padding: 7px 12px;
+
+    }
+    .cart-icon{
+        width: 30px;
+    }
+    .iconsRightBox{
+        gap: 12px;
+    }
+    .userCircleNav{
+        width: 35px;
+    }
+
+
+}
+
+
+
+@media (max-width: 640px){
+            .cardsmall{
+        width: 230px;
+        /* height: 150px; */
+    }
+
+
+    .TrendingListImg{
+        max-width: 95%;
+        margin: auto;
+        gap: 15px;
+    }
+
+
+        .Quote_container h1{
+        font-size: 30px
+
+    }
+    .Quote_container p{
+        font-size: 15px
+
+    }
+    .hero_container{
+        width: 100%;
+        height: 450px;
+        border-radius: 0px;
+    }
+
+
+}
+
+
+@media (max-width: 590px){
+
+        .cardsmall{
+        width: 210px;
+        /* height: 150px; */
+    }
+
+
+
+}
+
+@media (max-width: 550px){
+
+        .cardsmall{
+        width: 195px;
+        /* height: 150px; */
+    }
+
+}
+
+
+@media (max-width: 520px){
+
+        .cardsmall{
+        width: 180px;
+        height: 140px;
+    }
+
+}
+
+
+@media (max-width: 485px){
+
+        .cardsmall{
+        width: 165px;
+        /* height: 140px; */
+    }
+
+    .logo img{
+        height: 40px;
+        width: 40px;
+    }
+    .nav_bar{
+        padding: 10px 10px;
+    }
+
+}
+
+
+@media (max-width: 453px){
+
+        .cardsmall{
+        width: 155px;
+        /* height: 140px; */
+    }
+
+}
+
+
+@media (max-width: 435px){
+
+        .cardsmall{
+        width: 145px;
+        /* height: 140px; */
+    }
+
+}
+
+
+
+@media (max-width: 410px){
+
+        .cardsmall{
+        width: 135px;
+        /* height: 140px; */
+    }
+
+
+        .TrendingListImg{
+        max-width: 100%;
+        margin: auto;
+        
+    }
+
+
+        .auth_buttons button{
+        margin-left: 3px;
+        font-size: 12px;
+
+    }
+
+    .cart-icon{
+        width: 27px;
+    }
+    .nav_bar .iconsRightBox{
+        gap: 10px;
+        margin-right: 3px;
+    }
+
+    .triple{
+        width: 27px;
+    }
+    .userCircleNav{
+        width: 33px;
+    }
+
+
+}
+
+
+
+
+@media (max-width: 392px){
+
+        .cardsmall{
+        width: 130px;
+        /* height: 140px; */
+    }
+
+
+        .TrendingListImg{
+        max-width: 95%;
+        margin: auto;
+        gap: 8px;
+    }
+
+}
+
+
+@media (max-width: 373px){
+
+        .cardsmall{
+        width: 125px;
+        /* height: 140px; */
+    }
+
+
+        .TrendingListImg{
+        max-width: 100%;
+        margin: auto;
+        gap: 6px;
+    }
+
+}
+
+
+
+@media (max-width: 358px){
+
+        .cardsmall{
+        width: 250px;
+        height: 170px;
+    }
+
+
+        .TrendingListImg{
+        max-width: 95%;
+        margin: auto;
+        gap: 18px;
+    }
+
+}
