@@ -52,6 +52,7 @@ const AdminHotelDetails = () => {
         policies: hotelData.policies || null,
         mapEmbedUrl: hotelData.mapEmbedUrl || "",
       };
+      
 
       setHotel(formattedHotel);
 
@@ -196,6 +197,11 @@ if (hotel.images && hotel.images.length > 0) {
               {hotel.rooms.map((room, index) => (
                 <div key={index} className="room-card">
                   <div className="room-info">
+                    <div >
+                    <img className="roomImages" src={room.roomImages[0]} alt="" />
+                 
+
+                    </div>
                     <h3>{room.roomType}</h3>
                     <p>
                       <strong>₹{room.pricePerNight}</strong> / night

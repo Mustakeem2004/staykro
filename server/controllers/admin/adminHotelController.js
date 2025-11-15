@@ -3,48 +3,6 @@ const fs = require("fs");
 const path = require("path");
 
 // Create hotel with Cloudinary images
-// const addHotel = async (req, res) => {
-//   try {
-//     const {
-//       name,
-//       city,
-//       address,
-//       description,
-//       starRating,
-//       mapEmbedUrl,
-//       amenities,
-//       policies,
-//       rooms,
-//     } = req.body;
-
-//     const adminId = req.admin?._id || req.admin?.id || null;
-
-//     const lowerCity=city.toLowerCase();
-//     const thumbnail = req.files['mainPhoto'] ? req.files['mainPhoto'][0].path : null;
-//     const images = req.files['gallery'] ? req.files['gallery'].map(file => file.path) : [];
-
-//     const newHotel = new Hotel({
-//       name,
-//       city: lowerCity,
-//       address,
-//       description,
-//       starRating,
-//       thumbnail,
-//       images,
-//       mapEmbedUrl: mapEmbedUrl || "",
-//       amenities: amenities ? JSON.parse(amenities) : [],
-//       policies: policies ? JSON.parse(policies) : {},
-//       rooms: rooms ? JSON.parse(rooms) : [],
-//       addedBy: adminId,
-//     });
-
-//     const savedHotel = await newHotel.save();
-//     res.status(201).json({ success: true, hotel: savedHotel });
-//   } catch (error) {
-//     console.error("Error adding hotel:", error);
-//     res.status(500).json({ success: false, message: "Failed to add hotel" });
-//   }
-// };
 
 
 const addHotel = async (req, res) => {
@@ -64,21 +22,19 @@ const addHotel = async (req, res) => {
 
     const adminId = req.admin?._id || req.admin?.id || null;
 
-    // Basic validation
+    // ✅ Basic validation
     if (!name || !city || !address || !starRating || !basePricePerNight) {
       return res
         .status(400)
         .json({ success: false, message: "Missing required fields." });
     }
 
-    // Normalize city name
     const lowerCity = city.trim().toLowerCase();
 
-    // Handle file uploads (via multer)
+    // ✅ Extract file URLs
     const thumbnail = req.files?.mainPhoto?.[0]?.path || null;
-    const images = req.files?.gallery
-      ? req.files.gallery.map((file) => file.path)
-      : [];
+    const images = req.files?.gallery?.map((file) => file.path) || [];
+    const roomImages = req.files?.roomPhotos?.map((file) => file.path) || [];
 
     if (!thumbnail) {
       return res
@@ -86,18 +42,34 @@ const addHotel = async (req, res) => {
         .json({ success: false, message: "Main photo is required." });
     }
 
-    if (!images.length) {
-      return res
-        .status(400)
-        .json({ success: false, message: "At least one gallery image is required." });
-    }
-
-    // Safely parse JSON fields
+    // ✅ Parse JSON fields safely
     const parsedAmenities = amenities ? JSON.parse(amenities) : [];
-    const parsedPolicies = policies ? JSON.parse(policies) : {};
-    const parsedRooms = rooms ? JSON.parse(rooms) : [];
+    const parsedPolicies = policies ? JSON.parse(policies) : [];
+    let parsedRooms = rooms ? JSON.parse(rooms) : [];
 
-    // Create new hotel document
+    // ✅ Handle room images mapping
+    const roomIndices = req.body.roomIndices
+      ? JSON.parse(req.body.roomIndices)
+      : [];
+    const roomImageUrls = roomImages || [];
+
+    // Map room images to their corresponding room
+    const roomImagesMap = {};
+    roomImageUrls.forEach((url, index) => {
+      const roomIndex = roomIndices[index];
+      if (!roomImagesMap[roomIndex]) {
+        roomImagesMap[roomIndex] = [];
+      }
+      roomImagesMap[roomIndex].push(url);
+    });
+
+    // Attach roomImages to parsedRooms
+    parsedRooms = parsedRooms.map((room, index) => ({
+      ...room,
+      roomImages: roomImagesMap[index] || [],
+    }));
+
+    // ✅ Create and save hotel
     const newHotel = new Hotel({
       name: name.trim(),
       city: lowerCity,
@@ -114,22 +86,193 @@ const addHotel = async (req, res) => {
       addedBy: adminId,
     });
 
-    // Save hotel to database
     const savedHotel = await newHotel.save();
 
     res.status(201).json({
       success: true,
-      message: "Hotel added successfully.",
+      message: "Hotel added successfully with room images.",
       hotel: savedHotel,
     });
   } catch (error) {
     console.error("❌ Error adding hotel:", error);
-    res.status(500).json({
-      success: false,
-      message: error.message || "Failed to add hotel.",
-    });
+    res
+      .status(500)
+      .json({ success: false, message: error.message || "Failed to add hotel" });
   }
 };
+
+
+// const addHotel = async (req, res) => {
+//   try {
+//     const {
+//       name,
+//       city,
+//       address,
+//       description,
+//       starRating,
+//       mapEmbedUrl,
+//       amenities,
+//       policies,
+//       rooms,
+//       basePricePerNight,
+//     } = req.body;
+
+//     const adminId = req.admin?._id || req.admin?.id || null;
+
+//     // ✅ 1. Basic validation
+//     if (!name || !city || !address || !starRating || !basePricePerNight) {
+//       return res.status(400).json({ success: false, message: "Missing required fields." });
+//     }
+
+//     const lowerCity = city.trim().toLowerCase();
+
+//     // ✅ 2. Extract file URLs safely
+//     const thumbnail = req.files?.mainPhoto?.[0]?.path || null;
+//     const images = req.files?.gallery?.map(file => file.path) || [];
+//     const roomImages = req.files?.roomPhotos?.map(file => file.path) || [];
+
+//     if (!thumbnail) {
+//       return res.status(400).json({ success: false, message: "Main photo is required." });
+//     }
+
+//     // ✅ 3. Parse JSON string fields safely
+//     const parsedAmenities = amenities ? JSON.parse(amenities) : [];
+//     const parsedPolicies = policies ? JSON.parse(policies) : [];
+//     let parsedRooms = rooms ? JSON.parse(rooms) : [];
+
+//     // ✅ 4. Distribute uploaded room images across rooms
+//     let roomImageIndex = 0;
+//     parsedRooms = parsedRooms.map((room) => {
+//       // Get the next batch of images for this room (however many were uploaded for it)
+//       const nextImages = roomImages.slice(
+//         roomImageIndex,
+//         roomImageIndex + (room.uploadCount || 0)
+//       );
+//       roomImageIndex += (room.uploadCount || 0);
+      
+//       return {
+//         ...room,
+//         roomImages: nextImages, // Only include the image URLs
+//       };
+//     });
+
+//     // ✅ 5. Create and save hotel
+//     const newHotel = new Hotel({
+//       name: name.trim(),
+//       city: lowerCity,
+//       address: address.trim(),
+//       description: description?.trim() || "",
+//       starRating: Number(starRating),
+//       thumbnail,
+//       images,
+//       mapEmbedUrl: mapEmbedUrl?.trim() || "",
+//       amenities: parsedAmenities,
+//       policies: parsedPolicies,
+//       rooms: parsedRooms,
+//       basePricePerNight: Number(basePricePerNight),
+//       addedBy: adminId,
+//     });
+
+//     const savedHotel = await newHotel.save();
+
+//     res.status(201).json({
+//       success: true,
+//       message: "Hotel added successfully with room images.",
+//       hotel: savedHotel,
+//     });
+//   } catch (error) {
+//     console.error("❌ Error adding hotel:", error);
+//     res.status(500).json({ success: false, message: error.message || "Failed to add hotel" });
+//   }
+// };
+
+// module.exports = { addHotel };
+
+
+
+// const addHotel = async (req, res) => {
+//   try {
+//     const {
+//       name,
+//       city,
+//       address,
+//       description,
+//       starRating,
+//       mapEmbedUrl,
+//       amenities,
+//       policies,
+//       rooms,
+//       basePricePerNight,
+//     } = req.body;
+
+//     const adminId = req.admin?._id || req.admin?.id || null;
+
+//     // Basic validation
+//     if (!name || !city || !address || !starRating || !basePricePerNight) {
+//       return res
+//         .status(400)
+//         .json({ success: false, message: "Missing required fields." });
+//     }
+
+//     // Normalize city name
+//     const lowerCity = city.trim().toLowerCase();
+
+//     // Handle file uploads (via multer)
+//     const thumbnail = req.files?.mainPhoto?.[0]?.path || null;
+//     const images = req.files?.gallery
+//       ? req.files.gallery.map((file) => file.path)
+//       : [];
+
+//     if (!thumbnail) {
+//       return res
+//         .status(400)
+//         .json({ success: false, message: "Main photo is required." });
+//     }
+
+//     if (!images.length) {
+//       return res
+//         .status(400)
+//         .json({ success: false, message: "At least one gallery image is required." });
+//     }
+
+//     // Safely parse JSON fields
+//     const parsedAmenities = amenities ? JSON.parse(amenities) : [];
+//     const parsedPolicies = policies ? JSON.parse(policies) : {};
+//     const parsedRooms = rooms ? JSON.parse(rooms) : [];
+
+//     // Create new hotel document
+//     const newHotel = new Hotel({
+//       name: name.trim(),
+//       city: lowerCity,
+//       address: address.trim(),
+//       description: description?.trim() || "",
+//       starRating: Number(starRating),
+//       thumbnail,
+//       images,
+//       mapEmbedUrl: mapEmbedUrl?.trim() || "",
+//       amenities: parsedAmenities,
+//       policies: parsedPolicies,
+//       rooms: parsedRooms,
+//       basePricePerNight: Number(basePricePerNight),
+//       addedBy: adminId,
+//     });
+
+//     // Save hotel to database
+//     const savedHotel = await newHotel.save();
+
+//     res.status(201).json({
+//       success: true,
+//       message: "Hotel added successfully.",
+//       hotel: savedHotel,
+//     });
+//   } catch (error) {
+//     console.error("❌ Error adding hotel:", error);
+//     res.status(500).json({
+//       success: false,
+//       message: error.message || "Failed to add hotel.",
+//     });
+//   }
+// };
 
 
 

@@ -4,10 +4,14 @@ const mongoose = require("mongoose");
 const roomSchema = new mongoose.Schema({
   roomType: { type: String},
   pricePerNight: { type: Number },
+  BasicGuestQuantity: { type: Number },
+  DoubleBed: { type: Number, default:  1},
+  SingleBed: { type: Number, default: 1 },
+  ExtraGuestPricePerNight: { type: Number },
   maxGuests: { type: Number },
-  beds: { type: Number},
-  availableRooms: { type: Number, default: 0 },
   roomAmenities: [String],
+  availableRooms: { type: Number, default: 0 },
+  roomImages : { type: [String] },
 });
 
 const hotelSchema = new mongoose.Schema(

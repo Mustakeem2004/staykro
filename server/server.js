@@ -4,20 +4,16 @@ dotenv.config();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const connectMongoDb = require("./config/db.js");
-const authRoutes = require("./routes/auth");
-// const hotelRoutes= require("./routes/hotel.js");
 const passport = require("./config/passport.js");
-const Cart = require("./models/Cart.js")
-const Hotel = require("./models/Hotel.js")
-const Booking= require("./models/Booking.js")
 const paymentRoutes = require("./routes/payment");
-const authmiddleware = require("./middleware/authMiddleware.js");
 const adminBookingRoutes = require("./routes/adminRoutes/adminBookingRoutes");
 const adminDashboardRoutes = require("./routes/adminRoutes/adminDashboardRoutes");
 const adminAuthRoutes = require("./routes/adminRoutes/adminAuthRoutes");
 const hotelRoutes = require("./routes/hotel.js");
 const superAdminHotelRoutes = require("./routes/superAdminRoutes/superAdminHotelRoutes.js");
+const authRoutes = require("./routes/auth");
 
+const authmiddleware = require("./middleware/authMiddleware.js");
 const adminAuth = require("./middleware/adminMiddleware.js");
 // require("./routes/adminRoutes/")
 const PORT = process.env.PORT || 3000;
