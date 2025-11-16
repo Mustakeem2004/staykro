@@ -6,6 +6,7 @@ import { CartContext } from "../../context/CartContext";
 import { HotelContext } from "../../context/HotelContext";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
+import RoomImageModal from "./RoomImageModal";
 import "../HotelDetails.css";
 import "./AdminHotelDetails.css";
 
@@ -18,9 +19,11 @@ const AdminHotelDetails = () => {
   const { checkIn, checkOut } = useContext(SearchContext);
   const { user } = useContext(AuthContext);
 
-  const [hotel, setHotel] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const [hotel, setHotel] = useState(null);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
+const [selectedRoom, setSelectedRoom] = useState(null); // <-- ADD THIS
+
 
   // ✅ Fetch hotel details
   const fetchHotelDetails = async () => {
@@ -189,52 +192,84 @@ if (hotel.images && hotel.images.length > 0) {
           </div>
         )}
 
-        {/* ✅ Rooms Section (only if available) */}
-        {hotel.rooms && hotel.rooms.length > 0 && (
-          <div className="hotel-section">
-            <h2>Available Rooms</h2>
-            <div className="rooms-grid">
-              {hotel.rooms.map((room, index) => (
-                <div key={index} className="room-card">
-                  <div className="room-info">
-                    <div >
-                    <img className="roomImages" src={room.roomImages[0]} alt="" />
-                 
+{/* ✅ Rooms Section (only if available) */}
+{hotel.rooms && hotel.rooms.length > 0 && (
+  <div className="hotel-section">
+    <h2>Available Rooms</h2>
 
-                    </div>
-                    <h3>{room.roomType}</h3>
-                    <p>
-                      <strong>₹{room.pricePerNight}</strong> / night
-                    </p>
-                    <p>
-                      🛏️ {room.beds} Beds • 👥 Max Guests: {room.maxGuests}
-                    </p>
-                    <p>🏠 Available: {room.availableRooms}</p>
+    <div className="rooms-grid">
+      {hotel.rooms.map((room, index) => (
+        <div key={index} className="room-card">
+          <div className="room-info">
 
-                    {room.roomAmenities && room.roomAmenities.length > 0 && (
-                      <ul className="room-amenities">
-                        {room.roomAmenities.map((amenity, i) => (
-                          <li key={i}>• {amenity}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                  {/* ✅ Book Now Button for Each Room */}
-                    <div className="room-actions">
-                      <button
-                        className="room-book-btn"
-                        onClick={() => handlePayment(room._id)}
-                      >
-                        Book This Room
-                      </button>
-                    </div>
-                </div>
-              ))}
-              
+            {/* Room Image + View All */}
+            <div>
+              <img
+                className="roomImages"
+                src={room.roomImages?.[0]}
+                alt="Room"
+              />
+
+              {room.roomImages &&
+                room.roomImages.length > 1 && (
+                  <button
+                    className="view-all-btn"
+                    onClick={() =>
+                      setSelectedRoom({
+                        roomType: room.roomType,
+                        images: room.roomImages,
+                      })
+                    }
+                  >
+                    View all images ({room.roomImages.length})
+                  </button>
+                )}
             </div>
-            
+
+            <h3>{room.roomType}</h3>
+            <p>
+              <strong>₹{room.pricePerNight}</strong> / night
+            </p>
+            <p>
+              🛏️ {room.beds} Beds • 👥 Max Guests: {room.maxGuests}
+            </p>
+            <p>🏠 Available: {room.availableRooms}</p>
+
+            {room.roomAmenities && room.roomAmenities.length > 0 && (
+              <ul className="room-amenities">
+                {room.roomAmenities.map((amenity, i) => (
+                  <li key={i}>• {amenity}</li>
+                ))}
+              </ul>
+            )}
           </div>
-        )}
+
+          {/* Book Button */}
+          <div className="room-actions">
+            <button
+              className="room-book-btn"
+              onClick={() => handlePayment(room._id)}
+            >
+              Book This Room
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* Modal */}
+    {selectedRoom && (
+      <RoomImageModal
+        images={selectedRoom.images}
+        roomType={selectedRoom.roomType}
+        onClose={() => setSelectedRoom(null)}
+      />
+    )}
+  </div>
+)}
+
+
+
 
         {/* ✅ Map Section */}
         <div className="hotel-section map-section">

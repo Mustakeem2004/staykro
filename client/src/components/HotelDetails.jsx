@@ -7,6 +7,7 @@ import { HotelContext } from "../context/HotelContext";
 import { SearchContext } from "../context/SearchContext";
 import { AuthContext } from "../context/AuthContext";
 import "./HotelDetails.css";
+import RoomImageModal from "./admin/RoomImageModal";
 
 const HotelDetails = () => {
   const { id } = useParams();
@@ -17,9 +18,11 @@ const HotelDetails = () => {
   const { checkIn, checkOut } = useContext(SearchContext);
   const { user } = useContext(AuthContext);
 
-  const [hotel, setHotel] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const [hotel, setHotel] = useState(null);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
+const [selectedRoom, setSelectedRoom] = useState(null); // <-- ADD THIS
+
 
   // ✅ Fetch hotel details
   const fetchHotelDetails = async () => {
@@ -51,6 +54,7 @@ const HotelDetails = () => {
         policies: hotelData.policies || null,
         mapEmbedUrl: hotelData.mapEmbedUrl || "",
       };
+      
 
       setHotel(formattedHotel);
 
@@ -78,14 +82,15 @@ const HotelDetails = () => {
   if (error) return <p className="error">{error}</p>;
   if (!hotel) return <p className="error">Hotel not found.</p>;
 
-  // ✅ Handle photos
-// ✅ Handle photos (include thumbnail first, then gallery images)
+// ✅ Handle photos (thumbnail first, then gallery images)
 const galleryPhotos = [];
 
+// 1️⃣ Add thumbnail first (if available)
 if (hotel.image) {
   galleryPhotos.push({ url: hotel.image });
 }
 
+// 2️⃣ Add gallery images (excluding thumbnail if it’s also in the list)
 if (hotel.images && hotel.images.length > 0) {
   const formattedImages = hotel.images
     .filter((url) => url !== hotel.image) // prevent duplicate
@@ -112,7 +117,6 @@ if (hotel.images && hotel.images.length > 0) {
 
   return (
     <div className="hotel-details-container">
-       <SearchBar />
       {/* ✅ Gallery Section */}
       {galleryPhotos.length > 0 && <HotelGallery photos={galleryPhotos} />}
 
@@ -187,47 +191,84 @@ if (hotel.images && hotel.images.length > 0) {
           </div>
         )}
 
-        {/* ✅ Rooms Section (only if available) */}
-        {hotel.rooms && hotel.rooms.length > 0 && (
-          <div className="hotel-section">
-            <h2>Available Rooms</h2>
-            <div className="rooms-grid">
-              {hotel.rooms.map((room, index) => (
-                <div key={index} className="room-card">
-                  <div className="room-info">
-                    <h3>{room.roomType}</h3>
-                    <p>
-                      <strong>₹{room.pricePerNight}</strong> / night
-                    </p>
-                    <p>
-                      🛏️ {room.beds} Beds • 👥 Max Guests: {room.maxGuests}
-                    </p>
-                    <p>🏠 Available: {room.availableRooms}</p>
+{/* ✅ Rooms Section (only if available) */}
+{hotel.rooms && hotel.rooms.length > 0 && (
+  <div className="hotel-section">
+    <h2>Available Rooms</h2>
 
-                    {room.roomAmenities && room.roomAmenities.length > 0 && (
-                      <ul className="room-amenities">
-                        {room.roomAmenities.map((amenity, i) => (
-                          <li key={i}>• {amenity}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                  {/* ✅ Book Now Button for Each Room */}
-                    <div className="room-actions">
-                      <button
-                        className="room-book-btn"
-                        onClick={() => handlePayment(room._id)}
-                      >
-                        🏨 Book This Room
-                      </button>
-                    </div>
-                </div>
-              ))}
-              
+    <div className="rooms-grid">
+      {hotel.rooms.map((room, index) => (
+        <div key={index} className="room-card">
+          <div className="room-info">
+
+            {/* Room Image + View All */}
+            <div>
+              <img
+                className="roomImages"
+                src={room.roomImages?.[0]}
+                alt="Room"
+              />
+
+              {room.roomImages &&
+                room.roomImages.length > 1 && (
+                  <button
+                    className="view-all-btn"
+                    onClick={() =>
+                      setSelectedRoom({
+                        roomType: room.roomType,
+                        images: room.roomImages,
+                      })
+                    }
+                  >
+                    View all images ({room.roomImages.length})
+                  </button>
+                )}
             </div>
-            
+
+            <h3>{room.roomType}</h3>
+            <p>
+              <strong>₹{room.pricePerNight}</strong> / night
+            </p>
+            <p>
+              🛏️ {room.beds} Beds • 👥 Max Guests: {room.maxGuests}
+            </p>
+            <p>🏠 Available: {room.availableRooms}</p>
+
+            {room.roomAmenities && room.roomAmenities.length > 0 && (
+              <ul className="room-amenities">
+                {room.roomAmenities.map((amenity, i) => (
+                  <li key={i}>• {amenity}</li>
+                ))}
+              </ul>
+            )}
           </div>
-        )}
+
+          {/* Book Button */}
+          <div className="room-actions">
+            <button
+              className="room-book-btn"
+              onClick={() => handlePayment(room._id)}
+            >
+              Book This Room
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* Modal */}
+    {selectedRoom && (
+      <RoomImageModal
+        images={selectedRoom.images}
+        roomType={selectedRoom.roomType}
+        onClose={() => setSelectedRoom(null)}
+      />
+    )}
+  </div>
+)}
+
+
+
 
         {/* ✅ Map Section */}
         <div className="hotel-section map-section">
