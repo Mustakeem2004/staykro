@@ -1,4 +1,3 @@
-// export default EditHotelForm;
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./AddHotelForm.css";
@@ -18,6 +17,11 @@ const EditHotelForm = () => {
   const [mainPhotoPreview, setMainPhotoPreview] = useState(null);
   const [galleryPreviews, setGalleryPreviews] = useState([]);
   const [existingGallery, setExistingGallery] = useState([]); // old gallery images
+  
+  // Room images state
+  const [roomImages, setRoomImages] = useState({});
+  const [roomImagePreviews, setRoomImagePreviews] = useState({});
+  
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -48,6 +52,23 @@ const EditHotelForm = () => {
         });
         setMainPhotoPreview(h.thumbnail);
         setExistingGallery(h.images || []);
+
+        // Initialize room image previews from existing rooms
+        const initialPreviews = {};
+        h.rooms?.forEach((room, idx) => {
+          initialPreviews[idx] = room.roomImages?.map((url) => ({
+            type: "existing",
+            url,
+          })) || [];
+        });
+        setRoomImagePreviews(initialPreviews);
+
+        // Initialize empty room images object
+        const initialImages = {};
+        h.rooms?.forEach((_, idx) => {
+          initialImages[idx] = [];
+        });
+        setRoomImages(initialImages);
       } catch (err) {
         setError(err.message);
       }
@@ -143,21 +164,60 @@ const EditHotelForm = () => {
     setHotel((prev) => ({ ...prev, rooms: updatedRooms }));
   };
 
-  const addRoom = () => {
-    setHotel((prev) => ({
-      ...prev,
-      rooms: [
-        ...prev.rooms,
-        {
-          roomType: "",
-          pricePerNight: "",
-          maxGuests: "",
-          beds: "",
-          availableRooms: "",
-          roomAmenities: [],
-        },
-      ],
+  // Room image handlers
+  const handleRoomImageChange = (roomIndex, e) => {
+    const files = Array.from(e.target.files);
+    const previews = files.map((file) => ({
+      type: "new",
+      url: URL.createObjectURL(file),
     }));
+
+    setRoomImages((prev) => ({
+      ...prev,
+      [roomIndex]: [...(prev[roomIndex] || []), ...files],
+    }));
+
+    setRoomImagePreviews((prev) => ({
+      ...prev,
+      [roomIndex]: [...(prev[roomIndex] || []), ...previews],
+    }));
+  };
+
+  const removeRoomImage = (roomIndex, imageIndex) => {
+    setRoomImages((prev) => ({
+      ...prev,
+      [roomIndex]: prev[roomIndex].filter((_, i) => i !== imageIndex),
+    }));
+
+    setRoomImagePreviews((prev) => ({
+      ...prev,
+      [roomIndex]: prev[roomIndex].filter((_, i) => i !== imageIndex),
+    }));
+  };
+
+  const addRoom = () => {
+    setHotel((prev) => {
+      const newRoomIndex = prev.rooms.length;
+      setRoomImages((r) => ({ ...r, [newRoomIndex]: [] }));
+      setRoomImagePreviews((r) => ({ ...r, [newRoomIndex]: [] }));
+      return {
+        ...prev,
+        rooms: [
+          ...prev.rooms,
+          {
+            roomType: "",
+            pricePerNight: "",
+            BasicGuestQuantity: "",
+            ExtraGuestPricePerNight: "",
+            DoubleBed: "",
+            SingleBed: "",
+            maxGuests: "",
+            roomAmenities: [],
+            availableRooms: "",
+          },
+        ],
+      };
+    });
   };
 
   const removeRoom = (index) => {
@@ -165,6 +225,17 @@ const EditHotelForm = () => {
       ...prev,
       rooms: prev.rooms.filter((_, i) => i !== index),
     }));
+    // Clean up room images
+    setRoomImages((prev) => {
+      const updated = { ...prev };
+      delete updated[index];
+      return updated;
+    });
+    setRoomImagePreviews((prev) => {
+      const updated = { ...prev };
+      delete updated[index];
+      return updated;
+    });
   };
 
   // Submit
@@ -176,6 +247,8 @@ const EditHotelForm = () => {
 
     try {
       const formData = new FormData();
+
+      // Basic hotel fields
       Object.entries(hotel).forEach(([key, val]) => {
         if (["coordinates", "policies", "rooms"].includes(key)) {
           formData.append(key, JSON.stringify(val));
@@ -192,8 +265,23 @@ const EditHotelForm = () => {
         }
       });
 
+      // Main photo
       if (mainPhoto) formData.append("mainPhoto", mainPhoto);
+
+      // Gallery photos
       gallery.forEach((file) => formData.append("gallery", file));
+
+      // Room images
+      let roomIndices = [];
+      Object.entries(roomImages).forEach(([roomIndex, files]) => {
+        files.forEach((file) => {
+          formData.append("roomPhotos", file);
+          roomIndices.push(roomIndex);
+        });
+      });
+      if (roomIndices.length > 0) {
+        formData.append("roomIndices", JSON.stringify(roomIndices));
+      }
 
       const res = await fetch(`http://localhost:3000/api/admin/hotels/${id}`, {
         method: "PUT",
@@ -316,6 +404,8 @@ const EditHotelForm = () => {
         <h3>Rooms</h3>
         {hotel.rooms.map((room, i) => (
           <div key={i} className="room-section">
+            <h4>Room {i + 1}</h4>
+
             <label>Room Type:</label>
             <input
               name="roomType"
@@ -331,6 +421,51 @@ const EditHotelForm = () => {
               onChange={(e) => handleRoomChange(i, e)}
               placeholder="Price"
             />
+            
+            <label>Basic Guest Quantity:</label>
+            <input
+              type="number"
+              name="BasicGuestQuantity"
+              value={room.BasicGuestQuantity || ""}
+              onChange={(e) => handleRoomChange(i, e)}
+              placeholder="Basic Guest Quantity"
+            />
+
+            <label>Bed:</label>
+            <div style={{ display: "flex", gap: "50px" }}>
+              <div>
+                <label style={{ fontSize: "13px", fontWeight: 700 }}>Double Bed:</label>
+                <input
+                  style={{ maxWidth: "320px" }}
+                  type="number"
+                  name="DoubleBed"
+                  value={room.DoubleBed || ""}
+                  onChange={(e) => handleRoomChange(i, e)}
+                  placeholder="Double Bed"
+                />
+              </div>
+              <div>
+                <label style={{ fontSize: "13px", fontWeight: 700 }}>Single Bed:</label>
+                <input
+                  style={{ maxWidth: "320px" }}
+                  type="number"
+                  name="SingleBed"
+                  value={room.SingleBed || ""}
+                  onChange={(e) => handleRoomChange(i, e)}
+                  placeholder="Single Bed"
+                />
+              </div>
+            </div>
+
+            <label>Extra Guest Price Per Night:</label>
+            <input
+              type="number"
+              name="ExtraGuestPricePerNight"
+              value={room.ExtraGuestPricePerNight || ""}
+              onChange={(e) => handleRoomChange(i, e)}
+              placeholder="Extra Guest Price"
+            />
+
             <label>Max Guests:</label>
             <input
               type="number"
@@ -338,14 +473,6 @@ const EditHotelForm = () => {
               value={room.maxGuests}
               onChange={(e) => handleRoomChange(i, e)}
               placeholder="Max Guests"
-            />
-            <label>Beds:</label>
-            <input
-              type="number"
-              name="beds"
-              value={room.beds}
-              onChange={(e) => handleRoomChange(i, e)}
-              placeholder="Beds"
             />
             <label>Available Rooms:</label>
             <input
@@ -362,6 +489,35 @@ const EditHotelForm = () => {
               onChange={(e) => handleRoomChange(i, e)}
               placeholder="Room Amenities (comma separated)"
             />
+
+            {/* Room Images */}
+            <label>Room Images:</label>
+            <input
+              type="file"
+              multiple
+              accept="image/*"
+              onChange={(e) => handleRoomImageChange(i, e)}
+            />
+            
+            {/* Room Image Gallery */}
+            {roomImagePreviews[i] && roomImagePreviews[i].length > 0 && (
+              <div className="room-image-gallery">
+                {roomImagePreviews[i].map((preview, imgIdx) => (
+                  <div key={imgIdx} className="room-image-preview">
+                    <img src={preview.url} alt={`Room ${i} Image ${imgIdx}`} />
+                    <span className="image-type-badge">{preview.type}</span>
+                    <button
+                      type="button"
+                      className="remove-room-image"
+                      onClick={() => removeRoomImage(i, imgIdx)}
+                    >
+                      ×
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+
             <button type="button" onClick={() => removeRoom(i)}>
               ❌ Remove Room
             </button>
