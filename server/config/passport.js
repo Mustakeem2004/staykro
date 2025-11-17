@@ -20,7 +20,7 @@ passport.use(
   })
 );
 
-// Google OAuth
+// Google OAuth (Production only)
 const googleCallbackURL = process.env.GOOGLE_CALLBACK_URL || "https://staykro-backend.onrender.com/api/auth/google/callback";
 console.log("🔐 Google OAuth Callback URL:", googleCallbackURL);
 
@@ -29,8 +29,6 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      // Use the callback URL from env when available (supports production),
-      // otherwise fall back to Render backend callback.
       callbackURL: googleCallbackURL,
 
     },
