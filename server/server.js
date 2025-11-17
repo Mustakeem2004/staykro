@@ -33,6 +33,7 @@ app.use(
     origin: [
       "http://localhost:5173", 
       "http://localhost:5174",
+      "https://staykro.vercel.app",
       "https://travelwindow.vercel.app",
       process.env.FRONTEND_URL // dynamic frontend URL from env
     ].filter(Boolean),
