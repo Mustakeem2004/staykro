@@ -91,7 +91,7 @@ const AdminNavBar = () => {
   // ✅ Handle Logout
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:3000/api/auth/logout", {
+      await fetch("http://staykro-backend.onrender.com/api/auth/logout", {
         method: "POST",
         credentials: "include",
       });
