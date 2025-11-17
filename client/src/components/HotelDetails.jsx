@@ -95,7 +95,7 @@ if (hotel.images && hotel.images.length > 0) {
   const formattedImages = hotel.images
     .filter((url) => url !== hotel.image) // prevent duplicate
     .map((url) => ({
-      url: url.startsWith("http") ? url : `${API_BASE_URL}/${url}`,
+      url: url.startsWith("http") ? url : `https://staykro-backend.onrender.com/${url}`,
     }));
 
   galleryPhotos.push(...formattedImages);

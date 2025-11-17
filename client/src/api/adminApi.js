@@ -1,6 +1,6 @@
 import API_BASE_URL from "../config/api";
 
-const BASE_URL = `${API_BASE_URL}/admin/hotels`;
+const BASE_URL = `https://staykro-backend.onrender.com/admin/hotels`;
 
 // Fetch all hotels
 export const fetchAllHotels = async () => {

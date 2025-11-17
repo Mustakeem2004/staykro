@@ -24,7 +24,7 @@ const SuperAdminEditHotelForm = () => {
     const fetchHotel = async () => {
       try {
         const res = await fetch(
-          `${API_BASE_URL}/api/user/hotels/details/${id}`,
+          `https://staykro-backend.onrender.com/api/user/hotels/details/${id}`,
           { credentials: "include" }
         );
         const data = await res.json();
@@ -112,7 +112,7 @@ const SuperAdminEditHotelForm = () => {
     if (!window.confirm("❌ Delete this image permanently?")) return;
     try {
       const res = await fetch(
-        `${API_BASE_URL}/api/admin/hotels/${id}/delete-image`,
+        `https://staykro-backend.onrender.com/api/admin/hotels/${id}/delete-image`,
         {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
@@ -193,7 +193,7 @@ const SuperAdminEditHotelForm = () => {
       if (mainPhoto) formData.append("mainPhoto", mainPhoto);
       gallery.forEach((file) => formData.append("gallery", file));
 
-      const res = await fetch(`${API_BASE_URL}/api/admin/hotels/${id}`, {
+      const res = await fetch(`https://staykro-backend.onrender.com/api/admin/hotels/${id}`, {
         method: "PUT",
         body: formData,
         credentials: "include",

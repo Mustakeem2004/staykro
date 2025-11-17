@@ -8,7 +8,7 @@ export const CartProvider = ({ children }) => {
   const { user } = useContext(AuthContext);
   const userId = user?._id;
   const [cartItems, setCartItems] = useState([]);
-  const BASE_URL = `${API_BASE_URL}/api/cart`;
+  const BASE_URL = `https://staykro-backend.onrender.com/api/cart`;
 
   // 🧠 Load or Merge Cart when user changes
   useEffect(() => {
@@ -29,7 +29,7 @@ export const CartProvider = ({ children }) => {
               localCart.map(async (item) => {
                 try {
                   const res = await fetch(
-                    `${API_BASE_URL}/api/user/hotels/${item._id}`
+                    `https://staykro-backend.onrender.com/api/user/hotels/${item._id}`
                   );
                   if (!res.ok) throw new Error("Hotel not found");
                   const data = await res.json();
@@ -109,7 +109,7 @@ export const CartProvider = ({ children }) => {
 
         try {
           const res = await fetch(
-            `${API_BASE_URL}/api/user/hotels/${hotelId}`
+            `https://staykro-backend.onrender.com/api/user/hotels/${hotelId}`
           );
           if (!res.ok) throw new Error("Hotel not found");
           const data = await res.json();

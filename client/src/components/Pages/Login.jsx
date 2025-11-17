@@ -33,7 +33,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+      const response = await fetch(`https://staykro-backend.onrender.com/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formdata),
@@ -92,7 +92,7 @@ const Login = () => {
         type="button"
         className="googleBtn"
         onClick={() => {
-        window.location.href = `${API_BASE_URL}/api/auth/google`;
+        window.location.href = `https://staykro-backend.onrender.com/api/auth/google`;
         }}
       >
       <img src={GoogleLogo} alt="Google" /> Login with Google

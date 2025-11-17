@@ -68,7 +68,7 @@ const AdminNavBar = () => {
   useEffect(() => {
     const fetchAdminHotel = async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/api/admin/hotels/${user?._id}`, {
+        const res = await fetch(`https://staykro-backend.onrender.com/api/admin/hotels/${user?._id}`, {
           credentials: "include",
         });
         const data = await res.json();

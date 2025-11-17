@@ -11,7 +11,7 @@ const SuperAdminNavBar = () => {
 
     const handleLogout = async () => {
     try {
-      await fetch(`${API_BASE_URL}/api/auth/logout`, {
+      await fetch(`https://staykro-backend.onrender.com/api/auth/logout`, {
         method: "POST",
         credentials: "include",
       });

@@ -24,7 +24,7 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/auth/signup`, {
+      const response = await fetch(`https://staykro-backend.onrender.com/api/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formdata),
@@ -73,7 +73,7 @@ const Signup = () => {
       <p className="orWith">-------------- or With ---------------</p>
 
       <button type="button" className="googleBtn" onClick={() => {
-        window.location.href = `${API_BASE_URL}/api/auth/google`;
+        window.location.href = `https://staykro-backend.onrender.com/api/auth/google`;
         }}>
         <img src={GoogleLogo} alt="Google" /> Continue with Google
       </button>

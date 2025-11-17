@@ -48,7 +48,7 @@ const PaymentPage = () => {
     }
 
     // Create order on backend
-    const orderData = await fetch(`${API_BASE_URL}/api/payment/orders`, {
+    const orderData = await fetch(`https://staykro-backend.onrender.com/api/payment/orders`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ amount: total }),

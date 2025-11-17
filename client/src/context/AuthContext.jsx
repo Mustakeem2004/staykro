@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   // Check if user is logged in on app load
   const fetchUser = async () => {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/auth/me`, {
+      const res = await fetch(`https://staykro-backend.onrender.com/api/auth/me`, {
         method: "GET",
         credentials: "include", // httpOnly cookie
       });
