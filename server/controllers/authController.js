@@ -71,8 +71,8 @@ exports.socialLoginCallback = (req, res) => {
 
 
     const redirectUrl = isProd
-      ? "https://your-production-frontend.com"
-      : "http://localhost:5173/";
+    ? "https://staykro.vercel.app"
+    : "http://localhost:5173/";
 
     res.redirect(redirectUrl);
   } catch (err) {
