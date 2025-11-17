@@ -9,6 +9,7 @@ import About from "./components/Pages/About";
 import Contact from "./components/Pages/Contact";
 import Signup from "./components/Pages/Signup";
 import Login from "./components/Pages/Login";
+import AuthSuccess from "./components/Pages/AuthSuccess";
 import Bookings from "./components/Pages/Bookings";
 import HotelDetails from "./components/HotelDetails";
 import HotelList from "./components/HotelList";
@@ -107,6 +108,7 @@ function AppContent() {
         {(role === "user" || role==="guest" ) && (
           <>
         <Route path="/" element={<Home />} />
+        <Route path="/auth/success" element={<AuthSuccess />} />
         <Route path="/hotels/:city" element={<HotelList />} />
         <Route path="/hotels/:city/:id" element={<HotelDetails />} />
         <Route path="/about" element={<About />} />

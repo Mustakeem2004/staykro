@@ -57,7 +57,10 @@ exports.login = (req, res) => {
 // 🔹 Social login callback (Google/Facebook)
 exports.socialLoginCallback = (req, res) => {
   try {
-    if (!req.user) return res.redirect("/login?error=OAuthFailed");
+    if (!req.user) {
+      const frontendUrl = process.env.FRONTEND_URL || "https://staykro.vercel.app";
+      return res.redirect(`${frontendUrl}/login?error=OAuthFailed`);
+    }
 
     const token = generateToken(req.user);
 
@@ -69,15 +72,13 @@ exports.socialLoginCallback = (req, res) => {
       maxAge: 3600000,
     });
 
-
-    const redirectUrl = isProd
-    ? "https://staykro.vercel.app"
-    : "https://staykro.vercel.app";
-
-    res.redirect(redirectUrl);
+    // Redirect to frontend success page where fetchUser() will be called
+    const frontendUrl = process.env.FRONTEND_URL || "https://staykro.vercel.app";
+    res.redirect(`${frontendUrl}/auth/success`);
   } catch (err) {
     console.error(err);
-    res.redirect("/login?error=OAuthFailed");
+    const frontendUrl = process.env.FRONTEND_URL || "https://staykro.vercel.app";
+    res.redirect(`${frontendUrl}/login?error=OAuthFailed`);
   }
 };
 
