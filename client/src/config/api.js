@@ -5,21 +5,21 @@
  * - Production: VITE_API_URL environment variable or https://staykro-backend.onrender.com
  */
 
-const getApiUrl = () => {
-  // For development
-  if (import.meta.env.DEV) {
-    return "http://localhost:3000";
-  }
+// const getApiUrl = () => {
+//   // For development
+//   if (import.meta.env.DEV) {
+//     return "http://localhost:3000";
+//   }
 
-  // For production - check environment variable first
-  if (import.meta.env.VITE_API_URL) {
-    return import.meta.env.VITE_API_URL;
-  }
+//   // For production - check environment variable first
+//   if (import.meta.env.VITE_API_URL) {
+//     return import.meta.env.VITE_API_URL;
+//   }
 
-  // Fallback to Render backend
-  return "https://staykro-backend.onrender.com";
-};
+//   // Fallback to Render backend
+//   return "https://staykro-backend.onrender.com";
+// };
 
-const API_BASE_URL = getApiUrl();
+const API_BASE_URL = "https://staykro-backend.onrender.com";
 
 export default API_BASE_URL;

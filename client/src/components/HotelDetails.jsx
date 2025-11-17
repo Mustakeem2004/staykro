@@ -30,7 +30,7 @@ const [selectedRoom, setSelectedRoom] = useState(null); // <-- ADD THIS
       setLoading(true);
       setError(null);
 
-      const res = await fetch(`${API_BASE_URL}/api/user/hotels/details/${id}`);
+      const res = await fetch(`https://staykro-backend.onrender.com/api/user/hotels/details/${id}`);
       if (!res.ok) throw new Error("Hotel not found");
 
       const data = await res.json();
