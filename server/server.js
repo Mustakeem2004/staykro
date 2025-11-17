@@ -59,7 +59,16 @@ app.use("/api/admin",require("./routes/adminRoutes/adminHotelRoutes.js"));
 app.use("/api/user",hotelRoutes);
 app.use("/api/superadmin", superAdminHotelRoutes);
 
-
+// Health check endpoint
+app.get("/api/health", (req, res) => {
+  res.json({
+    status: "ok",
+    server: "staykro-backend",
+    timestamp: new Date().toISOString(),
+    cors: "enabled",
+    environment: process.env.NODE_ENV || "development"
+  });
+});
 
 
 // --- Start server ---
