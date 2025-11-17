@@ -15,7 +15,7 @@ router.post("/login", passport.authenticate("local", { session: false }), authCo
 router.get("/google", passport.authenticate("google", { scope: ["profile", "email"],prompt: "select_account",  }));
 router.get(
   "/google/callback",
-  passport.authenticate("google", { failureRedirect: `${process.env.FRONTEND_URL || "https://staykro.vercel.app"}/login`, session: false }),
+  passport.authenticate("google", { failureRedirect: `https://staykro.vercel.app/login`, session: false }),
   authController.socialLoginCallback
 );
 

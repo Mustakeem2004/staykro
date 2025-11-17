@@ -45,8 +45,8 @@ exports.login = (req, res) => {
 
   res.cookie("token", token, {
     httpOnly: true,
-    secure: isProd, // true only in production
-    sameSite: isProd ? "None" : "Lax", // None for HTTPS, Lax for localhost
+    secure: true, // true only in production
+    sameSite: "None",
     path: "/",
     maxAge: 3600000, // 1 hour
   });
@@ -66,8 +66,8 @@ exports.socialLoginCallback = (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: isProd,
-      sameSite: isProd ? "None" : "Lax",
+    secure: true, // true only in production
+    sameSite: "None",
       path: "/",
       maxAge: 3600000,
     });
@@ -86,8 +86,8 @@ exports.socialLoginCallback = (req, res) => {
 exports.logout = (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
-    secure: isProd,
-    sameSite: isProd ? "None" : "Lax",
+    secure: true, // true only in production
+    sameSite: "None",
     path: "/",
   });
   res.json({ message: "Logged out successfully" });
