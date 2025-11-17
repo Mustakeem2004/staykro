@@ -4,6 +4,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import './Login.css';
+import API_BASE_URL from "../../config/api";
 import GoogleLogo from "../../assets/signupLoginLogo/google.png";
 import FacebookLogo from "../../assets/signupLoginLogo/facebook.png";
 import { AuthContext } from "../../context/AuthContext";
@@ -102,7 +103,7 @@ const Login = () => {
       </button> */}
 
         <p style={{ marginTop: "15px" }}>
-        Did not have an account? <span style={{ color: "blue", cursor: "pointer" }} onClick={() => navigate("/login")}>Signup</span>
+        Did not have an account? <span style={{ color: "blue", cursor: "pointer" }} onClick={() => navigate("/signup")}>Signup</span>
       </p>
     </form>
   );
