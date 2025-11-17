@@ -21,7 +21,7 @@ passport.use(
 );
 
 // Google OAuth (Production only)
-const googleCallbackURL = process.env.GOOGLE_CALLBACK_URL || "https://staykro-backend.onrender.com/api/auth/google/callback";
+const googleCallbackURL = "https://staykro-backend.onrender.com/api/auth/google/callback";
 console.log("🔐 Google OAuth Callback URL:", googleCallbackURL);
 
 passport.use(
