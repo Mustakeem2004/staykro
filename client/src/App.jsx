@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import API_BASE_URL from "./config/api";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -58,7 +59,7 @@ function AppContent() {
 
   // ✅ Fetch user info when app loads
   useEffect(() => {
-    fetch("http://localhost:3000/api/auth/me", {
+    fetch(`${API_BASE_URL}/api/auth/me`, {
       method: "GET",
       credentials: "include", // send cookies
     })

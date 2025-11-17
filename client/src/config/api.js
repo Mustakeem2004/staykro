@@ -2,7 +2,7 @@
  * API Configuration
  * Automatically uses backend URL based on environment
  * - Development: http://localhost:3000
- * - Production: VITE_API_URL environment variable or https://travelwindow-api.onrender.com
+ * - Production: VITE_API_URL environment variable or https://staykro-backend.onrender.com
  */
 
 const getApiUrl = () => {
@@ -17,7 +17,7 @@ const getApiUrl = () => {
   }
 
   // Fallback to Render backend
-  return "https://travelwindow-api.onrender.com";
+  return "https://staykro-backend.onrender.com";
 };
 
 const API_BASE_URL = getApiUrl();
