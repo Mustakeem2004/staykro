@@ -24,7 +24,7 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/api/auth/signup", {
+      const response = await fetch(`${API_BASE_URL}/api/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formdata),
@@ -73,7 +73,7 @@ const Signup = () => {
       <p className="orWith">-------------- or With ---------------</p>
 
       <button type="button" className="googleBtn" onClick={() => {
-        window.location.href = "http://localhost:3000/api/auth/google";
+        window.location.href = `${API_BASE_URL}/api/auth/google`;
         }}>
         <img src={GoogleLogo} alt="Google" /> Continue with Google
       </button>

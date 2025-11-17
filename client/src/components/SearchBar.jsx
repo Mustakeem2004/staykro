@@ -2,6 +2,7 @@
 import "./SearchBar.css";
 import { useState, useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from "../config/api";
 import { SearchContext } from "../context/SearchContext.jsx";
 
 function SearchBar() {
@@ -23,12 +24,6 @@ function SearchBar() {
   const [loading, setLoading] = useState(false);
   const dropdownRef = useRef(null);
 
-  // 🔹 Dynamic API base (auto-switch local/production)
-  const API_BASE =
-    import.meta.env.MODE === "development"
-      ? "http://localhost:3000"
-      : "https://travelwindow-backend.onrender.com";
-
   // 🔹 Fetch city suggestions
   const fetchSuggestions = async (input) => {
     if (!input.trim()) {
@@ -39,7 +34,7 @@ function SearchBar() {
     try {
       setLoading(true);
       const res = await fetch(
-        `${API_BASE}/api/cities?query=${encodeURIComponent(input)}`
+        `${API_BASE_URL}/api/cities?query=${encodeURIComponent(input)}`
       );
       const data = await res.json();
       setSuggestions(data || []);

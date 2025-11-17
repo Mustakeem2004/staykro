@@ -221,7 +221,7 @@ const SuperAdminAddHotelForm = () => {
         if (mainPhoto) formData.append("mainPhoto", mainPhoto);
         gallery.forEach((file) => formData.append("gallery", file));
   
-        const res = await fetch("http://localhost:3000/api/admin/hotels", {
+        const res = await fetch(`${API_BASE_URL}/api/admin/hotels`, {
           method: "POST",
           body: formData,
           credentials: "include",

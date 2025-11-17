@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import API_BASE_URL from "../../config/api";
 import "./AddHotelForm.css";
 
 const predefinedAmenities = ["WiFi", "Gym", "Parking", "Pool", "Restaurant"];
@@ -30,7 +31,7 @@ const EditHotelForm = () => {
     const fetchHotel = async () => {
       try {
         const res = await fetch(
-          `http://localhost:3000/api/user/hotels/details/${id}`,
+          `${API_BASE_URL}/api/user/hotels/details/${id}`,
           { credentials: "include" }
         );
         const data = await res.json();
@@ -135,7 +136,7 @@ const EditHotelForm = () => {
     if (!window.confirm("❌ Delete this image permanently?")) return;
     try {
       const res = await fetch(
-        `http://localhost:3000/api/admin/hotels/${id}/delete-image`,
+        `${API_BASE_URL}/api/admin/hotels/${id}/delete-image`,
         {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
@@ -283,7 +284,7 @@ const EditHotelForm = () => {
         formData.append("roomIndices", JSON.stringify(roomIndices));
       }
 
-      const res = await fetch(`http://localhost:3000/api/admin/hotels/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/admin/hotels/${id}`, {
         method: "PUT",
         body: formData,
         credentials: "include",

@@ -27,7 +27,7 @@ const SuperAdminHotelDetails = () => {
       setLoading(true);
       setError(null);
 
-      const res = await fetch(`http://localhost:3000/api/user/hotels/details/${id}`);
+      const res = await fetch(`${API_BASE_URL}/api/user/hotels/details/${id}`);
       if (!res.ok) throw new Error("Hotel not found");
 
       const data = await res.json();
@@ -91,7 +91,7 @@ if (hotel.images && hotel.images.length > 0) {
   const formattedImages = hotel.images
     .filter((url) => url !== hotel.image) // prevent duplicate
     .map((url) => ({
-      url: url.startsWith("http") ? url : `http://localhost:3000/${url}`,
+      url: url.startsWith("http") ? url : `${API_BASE_URL}/${url}`,
     }));
 
   galleryPhotos.push(...formattedImages);

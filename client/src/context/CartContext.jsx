@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import API_BASE_URL from "../config/api";
 import { AuthContext } from "./AuthContext";
 
 export const CartContext = createContext();
@@ -7,7 +8,7 @@ export const CartProvider = ({ children }) => {
   const { user } = useContext(AuthContext);
   const userId = user?._id;
   const [cartItems, setCartItems] = useState([]);
-  const BASE_URL = "http://localhost:3000/api/cart";
+  const BASE_URL = `${API_BASE_URL}/api/cart`;
 
   // 🧠 Load or Merge Cart when user changes
   useEffect(() => {
@@ -28,7 +29,7 @@ export const CartProvider = ({ children }) => {
               localCart.map(async (item) => {
                 try {
                   const res = await fetch(
-                    `http://localhost:3000/api/user/hotels/${item._id}`
+                    `${API_BASE_URL}/api/user/hotels/${item._id}`
                   );
                   if (!res.ok) throw new Error("Hotel not found");
                   const data = await res.json();
@@ -108,7 +109,7 @@ export const CartProvider = ({ children }) => {
 
         try {
           const res = await fetch(
-            `http://localhost:3000/api/user/hotels/${hotelId}`
+            `${API_BASE_URL}/api/user/hotels/${hotelId}`
           );
           if (!res.ok) throw new Error("Hotel not found");
           const data = await res.json();

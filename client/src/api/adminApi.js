@@ -1,4 +1,6 @@
-const BASE_URL = "http://localhost:3000/admin/hotels";
+import API_BASE_URL from "../config/api";
+
+const BASE_URL = `${API_BASE_URL}/admin/hotels`;
 
 // Fetch all hotels
 export const fetchAllHotels = async () => {

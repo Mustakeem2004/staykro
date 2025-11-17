@@ -21,7 +21,7 @@ const AdminHotelList = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`http://localhost:3000/api/admin/hotels/${user._id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/admin/hotels/${user._id}`, {
         credentials: "include", // if using auth cookies
       });
       if (!res.ok) throw new Error("Failed to fetch hotels");
@@ -40,7 +40,7 @@ const handleDelete = async (hotelId) => {
   if (!window.confirm("Are you sure you want to delete this hotel?")) return;
 
   try {
-    const res = await fetch(`http://localhost:3000/api/admin/hotels/${hotelId}`, {
+    const res = await fetch(`${API_BASE_URL}/api/admin/hotels/${hotelId}`, {
       method: "DELETE",
       credentials: "include",
     });

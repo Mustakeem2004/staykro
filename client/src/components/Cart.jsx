@@ -32,7 +32,7 @@ const Cart = () => {
       try {
         const promises = cartItems.map((item) => {
           const id = item._id || item.hotelId || item.id;
-          return fetch(`http://localhost:3000/api/user/hotels/${id}`).then(
+          return fetch(`${API_BASE_URL}/api/user/hotels/${id}`).then(
             (res) => {
               if (!res.ok) throw new Error("Hotel not found");
               return res.json();

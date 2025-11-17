@@ -12,7 +12,7 @@ const SuperAdminHotelList = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("http://localhost:3000/api/superadmin/hotels", {
+      const res = await fetch(`${API_BASE_URL}/api/superadmin/hotels`, {
         credentials: "include", // if using auth cookies
       });
       if (!res.ok) throw new Error("Failed to fetch hotels");
@@ -28,7 +28,7 @@ const SuperAdminHotelList = () => {
   const handleDelete = async (hotelId) => {
     if (!window.confirm("Are you sure you want to delete this hotel?")) return;
     try {
-      const res = await fetch(`http://localhost:3000/api/superadmin/hotels/${hotelId}`, {
+      const res = await fetch(`${API_BASE_URL}/api/superadmin/hotels/${hotelId}`, {
         method: "DELETE",
         credentials: "include",
       });
