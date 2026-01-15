@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext } from "react";
-
+import API_BASE_URL from "../config/api";
 export const HotelContext = createContext();
 
 // export const useHotelCache = () => useContext(HotelContext);

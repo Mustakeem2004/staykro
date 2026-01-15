@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import HotelCard from "../HotelCard";
 import {AuthContext} from "../../context/AuthContext";
 import { useContext } from "react";
+import API_BASE_URL from "../../config/api";
 
 const AdminHotelList = () => {
   const {user}=useContext(AuthContext);
@@ -21,7 +22,7 @@ const AdminHotelList = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`https://staykro-backend.onrender.com/api/admin/hotels/${user._id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/admin/hotels/${user._id}`, {
         credentials: "include", // if using auth cookies
       });
       if (!res.ok) throw new Error("Failed to fetch hotels");
@@ -40,7 +41,7 @@ const handleDelete = async (hotelId) => {
   if (!window.confirm("Are you sure you want to delete this hotel?")) return;
 
   try {
-    const res = await fetch(`https://staykro-backend.onrender.com/api/admin/hotels/${hotelId}`, {
+    const res = await fetch(`${API_BASE_URL}/api/admin/hotels/${hotelId}`, {
       method: "DELETE",
       credentials: "include",
     });

@@ -6,6 +6,7 @@ import SearchBar from "./SearchBar";
 import "./HotelList.css";
 import filterIcon from "./filter.png";
 import { HotelContext } from "../context/HotelContext";
+import API_BASE_URL from "../config/api";
 
 const HotelList = () => {
   const { city } = useParams();
@@ -44,7 +45,7 @@ const HotelList = () => {
         return;
       }
 
-      const res = await fetch(`https://staykro-backend.onrender.com/api/user/hotelList/city/${city}`); 
+      const res = await fetch(`${API_BASE_URL}/api/user/hotelList/city/${city}`); 
       if (!res.ok) throw new Error(`Server responded with ${res.status}`);
 
       const data = await res.json();

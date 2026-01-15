@@ -10,7 +10,7 @@
 
 //     const handleLogout = async () => {
 //     try {
-//       await fetch("http://localhost:3000/api/auth/logout", {
+//       await fetch("${API_BASE_URL}/api/auth/logout", {
 //         method: "POST",
 //         credentials: "include",
 //       });
@@ -57,6 +57,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { HotelContext } from "../../context/HotelContext";
+import API_BASE_URL from "../../config/api";
 
 const AdminNavBar = () => {
   const navigate = useNavigate();
@@ -68,7 +69,7 @@ const AdminNavBar = () => {
   useEffect(() => {
     const fetchAdminHotel = async () => {
       try {
-        const res = await fetch(`https://staykro-backend.onrender.com/api/admin/hotels/${user?._id}`, {
+        const res = await fetch(`${API_BASE_URL}/api/admin/hotels/${user?._id}`, {
           credentials: "include",
         });
         const data = await res.json();
@@ -91,7 +92,7 @@ const AdminNavBar = () => {
   // ✅ Handle Logout
   const handleLogout = async () => {
     try {
-      await fetch(`https://staykro-backend.onrender.com/api/auth/logout`, {
+      await fetch(`${API_BASE_URL}/api/auth/logout`, {
         method: "POST",
         credentials: "include",
       });

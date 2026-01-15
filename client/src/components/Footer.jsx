@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Footer.css"; // 👈 external CSS for responsiveness
+import API_BASE_URL from "../config/api";
 
 function Footer() {
   return (

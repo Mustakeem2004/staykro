@@ -60,7 +60,7 @@ function AppContent() {
 
   // ✅ Fetch user info when app loads
   useEffect(() => {
-    fetch(`https://staykro-backend.onrender.com/api/auth/me`, {
+    fetch(`${API_BASE_URL}/api/auth/me`, {
       method: "GET",
       credentials: "include", // send cookies
     })

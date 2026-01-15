@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 // import "./AddHotelForm.css";
 import { HotelContext } from "../../context/HotelContext";
+import API_BASE_URL from "../../config/api";
 
 const predefinedAmenities = ["WiFi", "Gym", "Parking", "Pool", "Restaurant"];
 
@@ -221,7 +222,7 @@ const SuperAdminAddHotelForm = () => {
         if (mainPhoto) formData.append("mainPhoto", mainPhoto);
         gallery.forEach((file) => formData.append("gallery", file));
   
-        const res = await fetch(`https://staykro-backend.onrender.com/api/admin/hotels`, {
+        const res = await fetch(`${API_BASE_URL}/api/admin/hotels`, {
           method: "POST",
           body: formData,
           credentials: "include",

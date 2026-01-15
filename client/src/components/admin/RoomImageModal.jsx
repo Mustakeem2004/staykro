@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./RoomImageModal.css";
-
+import API_BASE_URL from "../../config/api";
 const RoomImageModal = ({ images, roomType, onClose }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 

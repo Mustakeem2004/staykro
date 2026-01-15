@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './Filters.css';
+import API_BASE_URL from "../config/api";
+
 
 const Filters = ({ onFilterChange }) => {
   const [filters, setFilters] = useState({

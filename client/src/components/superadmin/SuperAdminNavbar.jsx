@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SuperAdminNavbar.css";
+import API_BASE_URL from "../../config/api";
 
 const SuperAdminNavBar = () => {
   const navigate=useNavigate();
@@ -11,7 +12,7 @@ const SuperAdminNavBar = () => {
 
     const handleLogout = async () => {
     try {
-      await fetch(`https://staykro-backend.onrender.com/api/auth/logout`, {
+      await fetch(`${API_BASE_URL}/api/auth/logout`, {
         method: "POST",
         credentials: "include",
       });

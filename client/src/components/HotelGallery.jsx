@@ -85,6 +85,7 @@
 
 import React, { useState, useEffect } from "react";
 import "./HotelGallery.css";
+import API_BASE_URL from "../config/api";
 
 const HotelGallery = ({ photos }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);

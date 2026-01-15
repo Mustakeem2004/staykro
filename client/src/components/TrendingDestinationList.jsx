@@ -1,6 +1,7 @@
 import React from 'react'
 import TrendingDestinationCard from './TrendingDestinationCard'
 import './TrendingDestinationList.css'
+import API_BASE_URL from "../config/api";
 
 
 const TrendingDestinationList = () => {

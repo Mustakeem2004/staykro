@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SuperAdminHotelCard from "./SuperAdminHotelCard";
+import API_BASE_URL from "../../config/api";
 
 const SuperAdminHotelList = () => {
   const [hotels, setHotels] = useState([]);
@@ -12,7 +13,7 @@ const SuperAdminHotelList = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`https://staykro-backend.onrender.com/api/superadmin/hotels`, {
+      const res = await fetch(`${API_BASE_URL}/api/superadmin/hotels`, {
         credentials: "include", // if using auth cookies
       });
       if (!res.ok) throw new Error("Failed to fetch hotels");
@@ -28,7 +29,7 @@ const SuperAdminHotelList = () => {
   const handleDelete = async (hotelId) => {
     if (!window.confirm("Are you sure you want to delete this hotel?")) return;
     try {
-      const res = await fetch(`https://staykro-backend.onrender.com/api/superadmin/hotels/${hotelId}`, {
+      const res = await fetch(`${API_BASE_URL}/api/superadmin/hotels/${hotelId}`, {
         method: "DELETE",
         credentials: "include",
       });

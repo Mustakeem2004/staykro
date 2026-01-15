@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { SearchContext } from "../../context/SearchContext";
 import "./Bookings.css"; // reuse styles
+import API_BASE_URL from "../../config/api";
 
 const Bookings = () => {
   const { bookings } = useContext(SearchContext);

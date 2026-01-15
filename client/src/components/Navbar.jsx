@@ -13,6 +13,7 @@ import contact from '../assets/contact-us.png'
 import bad from '../assets/bad.png'
 import about from '../assets/about.png'
 import { NavLink ,useLocation} from 'react-router-dom';
+import API_BASE_URL from "../config/api";
 
 
 
@@ -30,7 +31,7 @@ function Navbar() {
 
   const handleLogout = async () => {
     try {
-      await fetch(`https://staykro-backend.onrender.com/api/auth/logout`, {
+      await fetch(`${API_BASE_URL}/api/auth/logout`, {
         method: "POST",
         credentials: "include",
       });

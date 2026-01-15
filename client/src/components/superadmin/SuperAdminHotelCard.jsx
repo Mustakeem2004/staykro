@@ -1,6 +1,7 @@
 import React, { forwardRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import starRating from "../../assets/star.png";
+import API_BASE_URL from "../../config/api";
 
 const SuperAdminHotelCard = forwardRef(({ hotel,onEdit, onDelete }, ref) => {
   const navigate = useNavigate();

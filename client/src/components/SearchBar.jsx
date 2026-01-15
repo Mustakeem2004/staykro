@@ -34,7 +34,7 @@ function SearchBar() {
     try {
       setLoading(true);
       const res = await fetch(
-        `https://staykro-backend.onrender.com/api/cities?query=${encodeURIComponent(input)}`
+        `${API_BASE_URL}/api/cities?query=${encodeURIComponent(input)}`
       );
       const data = await res.json();
       setSuggestions(data || []);

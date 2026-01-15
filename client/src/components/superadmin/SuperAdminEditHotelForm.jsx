@@ -1,5 +1,6 @@
 import React, { useState, useEffect ,useRef} from "react";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
+import API_BASE_URL from "../../config/api";
 
 const predefinedAmenities = ["WiFi", "Gym", "Parking", "Pool", "Restaurant"];
 
@@ -24,7 +25,7 @@ const SuperAdminEditHotelForm = () => {
     const fetchHotel = async () => {
       try {
         const res = await fetch(
-          `https://staykro-backend.onrender.com/api/user/hotels/details/${id}`,
+          `${API_BASE_URL}/api/user/hotels/details/${id}`,
           { credentials: "include" }
         );
         const data = await res.json();
@@ -112,7 +113,7 @@ const SuperAdminEditHotelForm = () => {
     if (!window.confirm("❌ Delete this image permanently?")) return;
     try {
       const res = await fetch(
-        `https://staykro-backend.onrender.com/api/admin/hotels/${id}/delete-image`,
+        `${API_BASE_URL}/api/admin/hotels/${id}/delete-image`,
         {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
@@ -193,7 +194,7 @@ const SuperAdminEditHotelForm = () => {
       if (mainPhoto) formData.append("mainPhoto", mainPhoto);
       gallery.forEach((file) => formData.append("gallery", file));
 
-      const res = await fetch(`https://staykro-backend.onrender.com/api/admin/hotels/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/admin/hotels/${id}`, {
         method: "PUT",
         body: formData,
         credentials: "include",

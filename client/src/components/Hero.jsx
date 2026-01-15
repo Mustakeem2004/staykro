@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import {cities} from './UkCities.js'
 import SearchBar from './SearchBar.jsx';
+import API_BASE_URL from "../config/api";
 
 function Hero() {
   

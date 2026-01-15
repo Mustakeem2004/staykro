@@ -126,6 +126,7 @@ import React, { forwardRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import starRating from "../assets/star.png";
 import "./HotelCard.css";
+import API_BASE_URL from "../config/api";
 
 const HotelCard = forwardRef(({ hotel }, ref) => {
   const navigate = useNavigate();

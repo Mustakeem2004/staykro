@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import "./AddHotelForm.css";
 import { HotelContext } from "../../context/HotelContext";
+import API_BASE_URL from "../../config/api";
 
 const predefinedAmenities = ["WiFi", "Gym", "Parking", "Pool", "Restaurant"];
 
@@ -223,7 +224,7 @@ const { setHasHotel } = useContext(HotelContext);
       if (mainPhoto) formData.append("mainPhoto", mainPhoto);
       gallery.forEach((file) => formData.append("gallery", file));
 
-      const res = await fetch("http://localhost:3000/api/admin/hotels", {
+      const res = await fetch("${API_BASE_URL}/api/admin/hotels", {
         method: "POST",
         body: formData,
         credentials: "include",

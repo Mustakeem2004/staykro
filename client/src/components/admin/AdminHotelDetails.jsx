@@ -9,6 +9,7 @@ import { AuthContext } from "../../context/AuthContext";
 import RoomImageModal from "./RoomImageModal";
 import "../HotelDetails.css";
 import "./AdminHotelDetails.css";
+import API_BASE_URL from "../../config/api";
 
 const AdminHotelDetails = () => {
   const { id } = useParams();
@@ -31,7 +32,7 @@ const [selectedRoom, setSelectedRoom] = useState(null); // <-- ADD THIS
       setLoading(true);
       setError(null);
 
-      const res = await fetch(`https://staykro-backend.onrender.com/api/user/hotels/details/${id}`);
+      const res = await fetch(`${API_BASE_URL}/api/user/hotels/details/${id}`);
       if (!res.ok) throw new Error("Hotel not found");
 
       const data = await res.json();
@@ -96,7 +97,7 @@ if (hotel.images && hotel.images.length > 0) {
   const formattedImages = hotel.images
     .filter((url) => url !== hotel.image) // prevent duplicate
     .map((url) => ({
-      url: url.startsWith("http") ? url : `https://staykro-backend.onrender.com/${url}`,
+      url: url.startsWith("http") ? url : `${API_BASE_URL}/${url}`,
     }));
 
   galleryPhotos.push(...formattedImages);

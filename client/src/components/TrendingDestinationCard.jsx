@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { SearchContext } from '../context/SearchContext'
 import './TrendingDestinationCard.css'
+import API_BASE_URL from "../config/api";
 
 const TrendingDestinationCard = ({ data }) => {
   const {setCity}=useContext(SearchContext);

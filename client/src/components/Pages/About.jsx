@@ -1,5 +1,6 @@
 import React from "react";
 import './About.css'; // Create a separate CSS file for styling
+import API_BASE_URL from "../../config/api";
 
 const About = () => {
   return (
