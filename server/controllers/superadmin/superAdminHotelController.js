@@ -1,7 +1,7 @@
 const Hotel = require("../../models/Hotel");
 
 // Create hotel with Cloudinary images
-const addHotel = async (req, res) => {
+const superAdminAddHotel = async (req, res) => {
   try {
     const {
       name,
@@ -241,12 +241,45 @@ const deleteHotel = async (req, res) => {
 // };
 
 
+const deleteHotelImage = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { imageUrl } = req.body;
+
+    if (!imageUrl) {
+      return res.status(400).json({ success: false, message: "Image URL required" });
+    }
+
+    const hotel = await Hotel.findById(id);
+    if (!hotel) {
+      return res.status(404).json({ success: false, message: "Hotel not found" });
+    }
+
+    // Remove image URL from the hotel's images array
+    hotel.images = hotel.images.filter((img) => img !== imageUrl);
+    await hotel.save();
+
+    // Delete image file from server if stored locally
+    const filePath = path.join(__dirname, "..", imageUrl);
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+
+    return res.json({ success: true, message: "Image deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting hotel image:", error);
+    return res.status(500).json({ success: false, message: "Failed to delete image" });
+  }
+};
+
+
 module.exports = {
-  addHotel,
+  superAdminAddHotel,
   getAllHotels,
   // getHotelById,
   updateHotel,
   deleteHotel,
+  deleteHotelImage,
   // getHotelsByCity,
   // getHotelsForListByCity,
   // getHotelsForCartById,
@@ -254,3 +287,5 @@ module.exports = {
   getAdminHotel ,
   
 };
+
+

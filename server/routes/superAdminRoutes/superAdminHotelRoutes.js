@@ -56,16 +56,25 @@ const express = require("express");
 const router = express.Router();
 const { uploadHotelPhotos } = require("../../middleware/uploadMiddleware");
 const adminAuth = require("../../middleware/adminMiddleware");
+const superAdminMiddleware = require("../../middleware/superAdminMiddleware");
 const {
   addHotel,
   updateHotel,
   deleteHotel,
   getAdminHotel,
   deleteHotelImage,
-} = require("../../controllers/admin/adminHotelController");
+  getAllHotels,
+} = require("../../controllers/superadmin/superAdminHotelController");
+
+const {
+  superAdminAddHotel
+} =require("../../controllers/superadmin/superAdminHotelController");
 
 // ✅ Get all hotels for admin
 router.get("/hotels/:adminId", getAdminHotel);
+
+// ✅ Get all hotels 
+router.get("/hotels", getAllHotels);
 
 // ✅ Delete specific image from hotel
 router.delete("/hotels/:id/delete-image", deleteHotelImage);
@@ -73,9 +82,9 @@ router.delete("/hotels/:id/delete-image", deleteHotelImage);
 // ✅ POST /admin/hotels → Add hotel
 router.post(
   "/hotels",
-  adminAuth,
+  superAdminMiddleware,
   uploadHotelPhotos, // ✅ Just use middleware directly (no .fields())
-  addHotel
+  superAdminAddHotel
 );
 
 // ✅ PUT /admin/hotels/:id → Update existing hotel
