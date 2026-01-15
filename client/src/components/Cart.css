@@ -1,0 +1,186 @@
+.cart-container {
+  padding: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.cart-title {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.cart-message {
+  text-align: center;
+  margin-top: 24px;
+  color: #666;
+}
+
+/* GRID OUTSIDE */
+.cart-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  justify-items: center;
+}
+
+/* CARD */
+.cart-item {
+  width: 100%;
+  max-width: 1000px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 12px;
+}
+
+/* HEADER FOR BUTTON */
+.cart-header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* REMOVE BUTTON */
+.remove-btn {
+  background: #ff4d4f;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 18px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+}
+
+.remove-btn:hover {
+  background: #d9363e;
+}
+
+/* CENTER CARD */
+.cart-card-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* RESPONSIVE GRID */
+@media (min-width: 768px) {
+  .cart-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cart-item {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1100px) {
+  .cart-list {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-item {
+    max-width: 1000px;
+  }
+}
+
+
+/* GLOBAL SAFETY */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.cart-container {
+  padding: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* TITLE */
+.cart-title {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.cart-message {
+  text-align: center;
+  margin-top: 24px;
+  color: #666;
+}
+
+/* LIST */
+.cart-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* CARD */
+.cart-item {
+  width: 100%;
+  max-width: 1000px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* HEADER */
+.cart-header {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 8px;
+}
+
+/* BUTTON */
+.remove-btn {
+  max-width: 100%;
+  background: #ff4d4f;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 18px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.remove-btn:hover {
+  background: #d9363e;
+}
+
+/* CENTER HOTEL CARD */
+.cart-card-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* RESPONSIVE TUNING */
+@media (min-width: 768px) {
+  .cart-item {
+    padding: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .cart-item {
+    max-width: 1000px;
+  }
+}
+
