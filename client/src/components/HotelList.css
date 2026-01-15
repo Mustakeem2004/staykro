@@ -372,3 +372,40 @@
         }
 
 }
+
+
+@media (max-width: 370px) {
+
+
+                  .input_container{
+        width: 310px;
+
+        
+    }
+
+
+    .input_container input{
+        width: 120px;
+
+        
+    }
+                .hotelCard{
+        width: 310px;
+        }
+
+        .cardImage{
+            width: 115px;
+        }
+
+                        .cardData h2{
+            font-size: 11px;
+            /* line-height: 15px; */
+
+        }
+        .cardData p{
+            font-size: 9px;
+
+        }
+
+}
+

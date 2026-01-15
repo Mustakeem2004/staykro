@@ -164,12 +164,6 @@ const HotelCard = forwardRef(({ hotel }, ref) => {
         alt={hotel.hotelName ||  "Hotel"}
         className="cardImage"
         onError={handleError}
-        style={{
-          width: "250px",
-          maxHeight: "200px",
-          borderRadius: "10px",
-          objectFit: "cover",
-        }}
       />
 
       {/* Hotel Details */}
