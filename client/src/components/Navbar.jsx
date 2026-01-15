@@ -165,22 +165,6 @@ const changeToggleNav = () => {
         <div style={{ position: "relative" }}>
           {cartCount > 0 && (
             <span
-              style={{
-                position: "absolute",
-                top: "-28px",
-                right: "20px",
-                background: "red",
-                color: "white",
-                borderRadius: "50%",
-                width: "18px",
-                height: "18px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "12px",
-                fontWeight: "bold",
-                zIndex:"-1000000"
-              }}
               className='cartCount'
             >
               {cartCount}

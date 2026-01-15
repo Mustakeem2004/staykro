@@ -179,6 +179,62 @@
 
 }
 
+.cartCount {
+  position: absolute;
+  top: -30px;
+  /* right: -0.1rem; */
+  right: 20px;
+
+  background: red;
+  color: white;
+  border-radius: 50%;
+
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 12px;
+  font-weight: bold;
+
+  z-index: 10;
+}
+
+
+@media (max-width: 1095px) {
+  .cartCount {
+  top: -15px;
+  /* right: -0.1rem; */
+  right: 50px;
+  }
+}
+
+@media (max-width: 680px) {
+  .cartCount {
+      top: -15px;
+     right: 45px;
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+  }
+}
+
+
+@media (max-width: 410px) {
+  .cartCount {
+      top: -14px;
+     right: 40px;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+  }
+}
+
+
+
 
 
   

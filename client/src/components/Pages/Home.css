@@ -319,7 +319,7 @@
 @media (max-width: 453px){
 
         .cardsmall{
-        width: 155px;
+        width: 185px;
         /* height: 140px; */
     }
 
@@ -329,7 +329,7 @@
 @media (max-width: 435px){
 
         .cardsmall{
-        width: 145px;
+        width: 175px;
         /* height: 140px; */
     }
 
@@ -340,7 +340,7 @@
 @media (max-width: 410px){
 
         .cardsmall{
-        width: 135px;
+        width: 175px;
         /* height: 140px; */
     }
 
@@ -382,7 +382,7 @@
 @media (max-width: 392px){
 
         .cardsmall{
-        width: 130px;
+        width: 170px;
         /* height: 140px; */
     }
 
@@ -399,7 +399,23 @@
 @media (max-width: 373px){
 
         .cardsmall{
-        width: 125px;
+        width: 165px;
+        /* height: 140px; */
+    }
+
+
+        .TrendingListImg{
+        max-width: 100%;
+        margin: auto;
+        gap: 6px;
+    }
+
+}
+
+@media (max-width: 360px){
+
+        .cardsmall{
+        width: 160px;
         /* height: 140px; */
     }
 
@@ -414,11 +430,11 @@
 
 
 
-@media (max-width: 358px){
+@media (max-width: 350px){
 
         .cardsmall{
-        width: 250px;
-        height: 170px;
+        width: 290px;
+        height: 180px;
     }
 
 
