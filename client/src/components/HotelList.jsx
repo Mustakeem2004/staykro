@@ -39,7 +39,7 @@ const HotelList = () => {
       if (cache[city]) {
         setHotels(cache[city]);
         // console.log(hotels);
-        console.log(hotels);
+        // console.log(hotels);
         
         setLoading(false);
         return;

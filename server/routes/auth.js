@@ -27,7 +27,7 @@ router.get(
 router.post("/logout", authController.logout);
 
 // Get logged-in user
-router.get("/me", authController.getMe);
+router.get("/me", authmiddleware, authController.getMe);
 
 
 

@@ -35,6 +35,7 @@ import SuperAdminAddHotelForm from  "./components/superadmin/SuperAdminAddHotelF
 import SuperAdminEditHotelForm from "./components/superadmin/SuperAdminEditHotelForm";
 import SuperAdminNavBar from "./components/superadmin/SuperAdminNavbar";
 import SuperAdminHotelDetails from "./components/superadmin/SuperAdminHotelDetails";
+import { use } from "react";
 
 function App() {
   return (
@@ -89,7 +90,7 @@ function AppContent() {
 //   if (loading) return (
 //   <div style={{ textAlign: "center", marginTop: "100px" }}>
 //     <h2>Loading...</h2>
-//   </div>
+//   </div> 
 // );
 
 
