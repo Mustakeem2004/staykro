@@ -54,7 +54,7 @@ function App() {
 }
 
 function AppContent() {
-  const [role, setRole] = useState(null);
+  const [role, setRole] = useState("guest");
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -86,11 +86,11 @@ function AppContent() {
       .finally(() => setLoading(false));
   }, [navigate]);
 
-  if (loading) return (
-  <div style={{ textAlign: "center", marginTop: "100px" }}>
-    <h2>Loading...</h2>
-  </div>
-);
+//   if (loading) return (
+//   <div style={{ textAlign: "center", marginTop: "100px" }}>
+//     <h2>Loading...</h2>
+//   </div>
+// );
 
 
   return (
