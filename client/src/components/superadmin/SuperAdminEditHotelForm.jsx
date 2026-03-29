@@ -1,6 +1,7 @@
 import React, { useState, useEffect ,useRef} from "react";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import API_BASE_URL from "../../config/api";
+import { toast } from 'react-toastify';
 
 const predefinedAmenities = ["WiFi", "Gym", "Parking", "Pool", "Restaurant"];
 
@@ -123,10 +124,10 @@ const SuperAdminEditHotelForm = () => {
       );
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Failed to delete image");
-      alert("🗑️ Image deleted successfully");
+      toast.success("🗑️ Image deleted successfully");
       setExistingGallery((prev) => prev.filter((url) => url !== imageUrl));
     } catch (err) {
-      alert("Error: " + err.message);
+      toast.error("Error: " + err.message);
     }
   };
 
@@ -203,12 +204,12 @@ const SuperAdminEditHotelForm = () => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Failed to update hotel");
 
-      alert("✅ Hotel updated successfully!");
+      toast.success("✅ Hotel updated successfully!");
       navigate("/admin");
     } catch (err) {
       console.error(err);
       setError(err.message);
-      alert("❌ " + err.message);
+      toast.error("❌ " + err.message);
     } finally {
       setLoading(false);
     }

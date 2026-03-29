@@ -5,6 +5,7 @@ import HotelCard from "../HotelCard";
 import {AuthContext} from "../../context/AuthContext";
 import { useContext } from "react";
 import API_BASE_URL from "../../config/api";
+import { toast } from 'react-toastify';
 
 const AdminHotelList = () => {
   const {user}=useContext(AuthContext);
@@ -53,7 +54,7 @@ const handleDelete = async (hotelId) => {
 
     window.dispatchEvent(new Event("hotelDeleted"));
   } catch (err) {
-    alert(err.message);
+    toast.error(err.message);
   }
 };
 

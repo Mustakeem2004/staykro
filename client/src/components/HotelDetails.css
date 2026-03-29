@@ -203,6 +203,7 @@
 /* Gallery Section */
 .hotel-gallery {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   width: 100%;
   max-width: 1100px;
@@ -210,6 +211,12 @@
   overflow: hidden;
   margin-top: 2rem;
   box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+}
+.hotel-gallery img {
+  flex: 1 1 150px;
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 /* Responsive */
@@ -236,6 +243,10 @@
   .hotel-price h2 {
     font-size: 1.5rem;
   }
+
+  .map-container {
+    height: 300px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -251,6 +262,10 @@
 
   .hotel-price {
     width: 100%;
+  }
+
+  .map-container {
+    height: 250px;
   }
 }
 

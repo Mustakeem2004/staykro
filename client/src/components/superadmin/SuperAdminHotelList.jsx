@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SuperAdminHotelCard from "./SuperAdminHotelCard";
 import API_BASE_URL from "../../config/api";
+import { toast } from 'react-toastify';
 
 const SuperAdminHotelList = () => {
   const [hotels, setHotels] = useState([]);
@@ -36,7 +37,7 @@ const SuperAdminHotelList = () => {
       if (!res.ok) throw new Error("Failed to delete hotel");
       fetchHotels(); // refresh list
     } catch (err) {
-      alert(err.message);
+      toast.error(err.message);
     }
   };
 

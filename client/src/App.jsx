@@ -4,6 +4,9 @@ import API_BASE_URL from "./config/api";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import SkeletonLoader from './components/SkeletonLoader';
 
 const Home = lazy(() => import("./components/Pages/Home"));
 const About = lazy(() => import("./components/Pages/About"));
@@ -46,6 +49,7 @@ function App() {
           <SearchProvider>
             <HotelProvider>
               <ScrollToTop />
+              <ToastContainer position="top-right" autoClose={3000} />
               <AppContent />
             </HotelProvider>
           </SearchProvider>
@@ -96,7 +100,7 @@ function AppContent() {
 
 
   return (
-    <>
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       {/* Show correct navbar */}
       {role === "user" && <Navbar />}
       {role === "admin"  && <AdminNavBar />}
@@ -104,8 +108,9 @@ function AppContent() {
       {role === "guest" && <Navbar />}
 
     
-      <Suspense fallback={<div style={{ textAlign: "center", marginTop: "100px" }}><h2>Loading...</h2></div>}>
-      <Routes>
+      <div style={{ flex: 1 }}>
+        <Suspense fallback={<SkeletonLoader />}>
+        <Routes>
         {/* Public/User routes */}
         
         {(role === "user" || role==="guest" ) && (
@@ -150,12 +155,12 @@ function AppContent() {
         )}
         
         <Route path="*" element={<NotFound />} />
-      </Routes>
-      </Suspense>
-
+        </Routes>
+        </Suspense>
+      </div>
 
       <Footer />
-    </>
+    </div>
   );
 }
 

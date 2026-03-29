@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SuperAdminNavbar.css";
 import API_BASE_URL from "../../config/api";
+import { toast } from 'react-toastify';
 
 const SuperAdminNavBar = () => {
   const navigate=useNavigate();
@@ -17,7 +18,7 @@ const SuperAdminNavBar = () => {
         credentials: "include",
       });
       setUser(null);
-      alert("logout");
+      toast.success("logout");
       navigate("/login");
     } catch (err) {
       console.error("Logout failed:", err);
@@ -26,20 +27,12 @@ const SuperAdminNavBar = () => {
 
   
   return (
-    
-    <nav style={{
-      display: "flex",
-      justifyContent: "space-between",
-      padding: "10px 20px",
-      backgroundColor: "#0071c2",
-      color: "white",
-      alignItems: "center"
-    }}>
+    <nav className="adminNavbar">
       <h2>SuperAdmin</h2>
-      <div style={{ display: "flex", gap: "15px" ,alignItems:"center"}}>
+      <div className="navLinks">
         <Link to="/superadmin" style={{ color: "white", textDecoration: "none" }}>All Hotels</Link>
         <Link to="/superadmin/add-hotel" style={{ color: "white", textDecoration: "none" }}>Add Hotel</Link>
-        <button onClick={handleLogout} style={{ backgroundColor: "#ff4d4d", border: "none", padding: "6px 10px", color: "white", cursor: "pointer" }}>
+        <button onClick={handleLogout} className="logoutBtn">
           Logout
         </button>
       </div>

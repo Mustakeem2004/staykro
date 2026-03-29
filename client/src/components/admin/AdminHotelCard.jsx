@@ -2,6 +2,7 @@ import React, { forwardRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import starRating from "../../assets/star.png";
 import API_BASE_URL from "../../config/api";
+import "./AdminHotelCard.css";
 
 const AdminHotelCard = forwardRef(({ hotel,onEdit, onDelete }, ref) => {
   const navigate = useNavigate();
@@ -20,35 +21,17 @@ const AdminHotelCard = forwardRef(({ hotel,onEdit, onDelete }, ref) => {
   
 
   return (
-    <div
-      ref={ref}
-      className="hotelCard"
-      style={{
-        border: "1px solid #ddd",
-        borderRadius: "10px",
-        marginBottom: "20px",
-        padding: "15px",
-        display: "flex",
-        gap: "13px",
-        position:"relative",
-      }}
-    >
+    <div ref={ref} className="hotelCard">
       {/* Hotel Image */}
       <img
         src={imgSrc}
         alt={hotel.hotelName ||  "Hotel"}
         className="cardImage"
         onError={handleError}
-        style={{
-          width: "250px",
-          maxHeight: "200px",
-          borderRadius: "10px",
-          objectFit: "cover",
-        }}
       />
 
       {/* Hotel Details */}
-      <div className="cardData" style={{ width: "400px" }}>
+      <div className="cardData">
         <h2 style={{ padding: 0, margin: 0 }}>
           {hotel.hotelName || hotel.name || "Unnamed Hotel"}
         </h2>
@@ -64,15 +47,7 @@ const AdminHotelCard = forwardRef(({ hotel,onEdit, onDelete }, ref) => {
           / night
         </p>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            width: "100%",
-          }}
-        >
-          {/* See availability button remains unchanged */}
+        <div className="cardActionsRow">
           <button
             onClick={() =>
               navigate(
@@ -114,13 +89,12 @@ const AdminHotelCard = forwardRef(({ hotel,onEdit, onDelete }, ref) => {
               alt="star"
             />
           </div>
-
         </div>
-
       </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "5px", position:"absolute" ,top:"0px" ,right:"0px"}}>
-            <button style={{ padding: "6px 10px", cursor: "pointer" }} onClick={() => onEdit(hotel)}>Edit</button>
-            <button style={{ padding: "6px 10px", cursor: "pointer", backgroundColor: "#ff4d4d", color: "white" }} onClick={() => onDelete(hotel._id)}>Delete</button>
+
+      <div className="adminCardActions">
+        <button className="editBtn" onClick={() => onEdit(hotel)}>Edit</button>
+        <button className="deleteBtn" onClick={() => onDelete(hotel._id)}>Delete</button>
       </div>
 
     </div>

@@ -1,0 +1,91 @@
+.hotelCard {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 15px;
+  display: flex;
+  gap: 15px;
+  position: relative;
+  background-color: white;
+}
+
+.hotelCard .cardImage {
+  width: 250px;
+  height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.hotelCard .cardData {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.hotelCard .cardActionsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.hotelCard .adminCardActions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 10;
+}
+
+.hotelCard .adminCardActions button {
+  padding: 6px 12px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.hotelCard .adminCardActions .editBtn {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.hotelCard .adminCardActions .deleteBtn {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .hotelCard {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 12px;
+    gap: 10px;
+  }
+  .hotelCard .cardImage {
+    width: 120px;
+    height: 100px;
+    border-radius: 8px;
+  }
+  .hotelCard .cardData {
+    width: calc(100% - 130px);
+  }
+  .hotelCard .cardData h2 {
+    font-size: 1.2rem;
+  }
+  .hotelCard .adminCardActions {
+    position: relative;
+    top: 0;
+    right: 0;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 5px;
+  }
+  .hotelCard .adminCardActions button {
+    flex: 1;
+  }
+}

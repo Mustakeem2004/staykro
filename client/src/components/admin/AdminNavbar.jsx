@@ -15,7 +15,7 @@
 //         credentials: "include",
 //       });
 //       setUser(null);
-//       alert("logout");
+//       toast.success("logout");
 //       navigate("/login");
 //     } catch (err) {
 //       console.error("Logout failed:", err);
@@ -58,6 +58,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { HotelContext } from "../../context/HotelContext";
 import API_BASE_URL from "../../config/api";
+import { toast } from 'react-toastify';
 
 const AdminNavBar = () => {
   const navigate = useNavigate();
@@ -97,7 +98,7 @@ const AdminNavBar = () => {
         credentials: "include",
       });
       setUser(null);
-      alert("Logged out");
+      toast.success("Logged out");
       navigate("/login");
     } catch (err) {
       console.error("Logout failed:", err);
@@ -122,61 +123,25 @@ const AdminNavBar = () => {
   if (loading) return null; // optional: could show spinner
 
   return (
-    <nav
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        padding: "10px 20px",
-        backgroundColor: "#0071c2",
-        color: "white",
-        alignItems: "center",
-      }}
-    >
+    <nav className="adminNavbar">
       <h2>Hotel Admin</h2>
-      <div style={{ display: "flex", gap: "15px", alignItems: "center" }}>
+      <div className="navLinks">
         <Link to="/admin" style={{ color: "white", textDecoration: "none" }}>
           My Hotels
         </Link>
 
         {/* ✅ Conditionally show or disable Add Hotel button */}
         {hasHotel ? (
-          <button
-            disabled
-            style={{
-              backgroundColor: "gray",
-              border: "none",
-              padding: "6px 10px",
-              color: "white",
-              cursor: "not-allowed",
-            }}
-          >
+          <button disabled className="logoutBtn" style={{ backgroundColor: "gray", cursor: "not-allowed" }}>
             Hotel Added
           </button>
         ) : (
-          <Link
-            to="/admin/add-hotel"
-            style={{
-              color: "white",
-              textDecoration: "none",
-              backgroundColor: "#28a745",
-              padding: "6px 10px",
-              borderRadius: "4px",
-            }}
-          >
+          <Link to="/admin/add-hotel" className="logoutBtn" style={{ backgroundColor: "#28a745", textDecoration: "none" }}>
             Add Hotel
           </Link>
         )}
 
-        <button
-          onClick={handleLogout}
-          style={{
-            backgroundColor: "#ff4d4d",
-            border: "none",
-            padding: "6px 10px",
-            color: "white",
-            cursor: "pointer",
-          }}
-        >
+        <button onClick={handleLogout} className="logoutBtn">
           Logout
         </button>
       </div>

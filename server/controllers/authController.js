@@ -20,20 +20,39 @@ const generateToken = (user) => {
 // 🔹 Signup controller
 exports.signup = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, role, adminPasskey } = req.body;
+
+    // Validate passkeys if user requests admin/superadmin
+    let newRole = "user";
+
+    if (role === "admin") {
+      if (adminPasskey !== process.env.ADMIN_PASSKEY) {
+        return res.status(403).json({ error: "Invalid Admin Passkey" });
+      }
+      newRole = "admin";
+    } else if (role === "superadmin") {
+      if (adminPasskey !== process.env.SUPERADMIN_PASSKEY) {
+        return res.status(403).json({ error: "Invalid SuperAdmin Passkey" });
+      }
+      newRole = "superadmin";
+    }
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ error: "User already exists. Please login directly." });
     }
 
-    const newUser = new User({ name, email, password });
+    const newUser = new User({ name, email, password, role: newRole });
     await newUser.save();
 
     res.status(201).json({ message: "User registered successfully", user: newUser });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Server error" });
+    if (err.name === 'ValidationError') {
+      const messages = Object.values(err.errors).map(val => val.message);
+      return res.status(400).json({ error: messages.join(', ') });
+    }
+    res.status(500).json({ error: "Server error. Please try again." });
   }
 };
 

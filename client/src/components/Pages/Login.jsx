@@ -9,6 +9,7 @@ import GoogleLogo from "../../assets/signupLoginLogo/google.png";
 import FacebookLogo from "../../assets/signupLoginLogo/facebook.png";
 import { AuthContext } from "../../context/AuthContext";
 import { useLocation } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 
 const Login = () => {
@@ -45,13 +46,19 @@ const Login = () => {
       if (!response.ok) throw new Error(data.error || "Failed to login");
 
       await fetchUser(); // Refresh user context
-      navigate(from, { replace: true });
-      setTimeout(() => alert("Login successful!"), 100);
+      
+      if (data.user && (data.user.role === "admin" || data.user.role === "superadmin")) {
+        navigate("/", { replace: true });
+      } else {
+        navigate(from, { replace: true });
+      }
+
+      setTimeout(() => toast.success("Login successful!"), 100);
 
   
     } catch (err) {
       console.error("❌ Error:", err);
-      alert(err.message || "Something went wrong, please try again.");
+      toast.error(err.message || "Something went wrong, please try again.");
     }
   };
 

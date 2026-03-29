@@ -4,6 +4,7 @@ import { useState, useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import API_BASE_URL from "../config/api";
 import { SearchContext } from "../context/SearchContext.jsx";
+import { toast } from 'react-toastify';
 
 function SearchBar() {
   const {
@@ -68,7 +69,7 @@ function SearchBar() {
   // 🔹 Navigate to hotels page with parameters
   const handleExplore = () => {
     if (!city) {
-      alert("Please enter a city or hotel name");
+      toast.success("Please enter a city or hotel name");
       return;
     }
 

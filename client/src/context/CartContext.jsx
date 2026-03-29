@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import API_BASE_URL from "../config/api";
 import { AuthContext } from "./AuthContext";
+import { toast } from 'react-toastify';
 
 export const CartContext = createContext();
 
@@ -118,9 +119,9 @@ export const CartProvider = ({ children }) => {
           console.error("Error fetching hotel details:", err);
         }
 
-        alert("Added to cart (Guest Mode)");
+        toast.success("Added to cart (Guest Mode)");
       } else {
-        alert("Already in cart");
+        toast.success("Already in cart");
       }
       return;
     }
@@ -143,7 +144,7 @@ export const CartProvider = ({ children }) => {
       const hotels = data.map((item) => item.hotelId);
       setCartItems(hotels);
 
-      alert("Hotel added to cart");
+      toast.success("Hotel added to cart");
     } catch (err) {
       console.error("Error adding to cart:", err);
     }

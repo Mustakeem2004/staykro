@@ -264,3 +264,17 @@ button:disabled {
   margin-bottom: 12px;
   color: #0071c2;
 }
+
+@media (max-width: 768px) {
+  .addHotelFormContainer {
+    width: 95%;
+    margin: 15px auto;
+    padding: 15px;
+  }
+  .gallery-preview, .room-image-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+  .roomBlock, .room-section {
+    padding: 10px;
+  }
+}

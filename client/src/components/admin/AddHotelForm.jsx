@@ -4,6 +4,7 @@ import API_BASE_URL from "../../config/api";
 import { AuthContext } from "../../context/AuthContext";
 import { HotelContext } from "../../context/HotelContext";
 import "./AddHotelForm.css";
+import { toast } from 'react-toastify';
 
 const predefinedAmenities = ["WiFi", "Gym", "Parking", "Restaurant"];
 
@@ -204,24 +205,24 @@ const AddHotelForm = () => {
       !policies.checkOutTime ||
       !basePricePerNight
     ) {
-      alert("⚠️ Please fill all mandatory fields before submitting.");
+      toast.error("⚠️ Please fill all mandatory fields before submitting.");
       return;
     }
 
     if (!mainPhoto) {
-      alert("⚠️ Please upload a main photo.");
+      toast.error("⚠️ Please upload a main photo.");
       mainPhotoInputRef.current?.scrollIntoView({ behavior: "smooth" });
       return;
     }
 
     if (gallery.length === 0) {
-      alert("⚠️ Please upload at least one gallery photo.");
+      toast.error("⚠️ Please upload at least one gallery photo.");
       galleryInputRef.current?.scrollIntoView({ behavior: "smooth" });
       return;
     }
 
     if (starRating < 1 || starRating > 5) {
-      alert("⭐ Star rating must be between 1 and 5.");
+      toast.success("⭐ Star rating must be between 1 and 5.");
       return;
     }
 
@@ -279,14 +280,14 @@ const AddHotelForm = () => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Failed to add hotel");
 
-      alert("✅ Hotel added successfully!");
+      toast.success("✅ Hotel added successfully!");
       window.dispatchEvent(new Event("hotelAdded"));
       setHasHotel(true);
       navigate("/admin");
     } catch (err) {
       console.error(err);
       setError(err.message);
-      alert(`❌ Error: ${err.message}`);
+      toast.error(`❌ Error: ${err.message}`);
     } finally {
       setLoading(false);
     }

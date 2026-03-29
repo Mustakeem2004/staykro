@@ -9,6 +9,7 @@ import { AuthContext } from "../context/AuthContext";
 import "./HotelDetails.css";
 import RoomImageModal from "./admin/RoomImageModal";
 import API_BASE_URL from "../config/api";
+import { toast } from 'react-toastify';
 
 const HotelDetails = () => {
   const { id } = useParams();
@@ -106,7 +107,7 @@ if (hotel.images && hotel.images.length > 0) {
   // ✅ Handle Booking
   const handlePayment = () => {
     if (!checkIn || !checkOut) {
-      alert("Please select check-in and check-out dates first.");
+      toast.error("Please select check-in and check-out dates first.");
       return;
     }
     if (!user) {

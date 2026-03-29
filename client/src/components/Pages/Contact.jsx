@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from './Contact.module.css';
 import API_BASE_URL from "../../config/api";
+import { toast } from 'react-toastify';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +16,7 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Thank you! Your message has been sent.");
+    toast.success("Thank you! Your message has been sent.");
     setFormData({ name: "", email: "", message: "" });
   };
 

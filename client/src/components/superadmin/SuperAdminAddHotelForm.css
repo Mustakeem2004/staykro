@@ -96,3 +96,14 @@ button:disabled {
   gap: 12px;
   margin-top: 10px;
 }
+
+@media (max-width: 768px) {
+  .addHotelFormContainer {
+    width: 95%;
+    margin: 15px auto;
+    padding: 15px;
+  }
+  .gallery-preview {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+}

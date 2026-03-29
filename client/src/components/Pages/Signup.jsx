@@ -1,11 +1,12 @@
 
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import './Signup.css';
+import './Login.css';
 import GoogleLogo from "../../assets/signupLoginLogo/google.png";
 import FacebookLogo from "../../assets/signupLoginLogo/facebook.png";
 import { AuthContext } from "../../context/AuthContext";
 import API_BASE_URL from "../../config/api";
+import { toast } from 'react-toastify';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -15,6 +16,8 @@ const Signup = () => {
     name: "",
     email: "",
     password: "",
+    role: "user",
+    adminPasskey: "",
   });
 
   const handleChange = (e) => {
@@ -38,11 +41,11 @@ const Signup = () => {
 
       await fetchUser(); // Refresh user context
 
-      alert("Registration successful!");
- // Redirect to home
+      navigate("/", { replace: true }); // Redirect to home/dashboard before route unmounts
+      setTimeout(() => toast.success("Registration successful!"), 100);
     } catch (err) {
       console.error("❌ Error:", err);
-      alert(err.message || "Something went wrong, please try again.");
+      toast.error(err.message || "Something went wrong, please try again.");
     }
   };
 
@@ -62,12 +65,45 @@ const Signup = () => {
         <input className="formInput" type="email" name="email" value={formdata.email} onChange={handleChange} required />
       </div>
       </div>
-           <div  className="Outside">
+      <div  className="Outside">
       <div className="input-group">
         <label>Password</label>
         <input className="formInput" type="password" name="password" value={formdata.password} onChange={handleChange} required />
       </div>
       </div>
+
+      <div className="Outside">
+        <div className="input-group">
+          <label>Role</label>
+          <select 
+            className="formInput" 
+            name="role" 
+            value={formdata.role} 
+            onChange={handleChange} 
+          >
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+            <option value="superadmin">SuperAdmin</option>
+          </select>
+        </div>
+      </div>
+
+      {(formdata.role === "admin" || formdata.role === "superadmin") && (
+        <div className="Outside">
+          <div className="input-group">
+            <label>Passkey</label>
+            <input 
+              className="formInput" 
+              type="password" 
+              name="adminPasskey" 
+              value={formdata.adminPasskey} 
+              onChange={handleChange} 
+              placeholder={`Enter ${formdata.role} passkey`}
+              required 
+            />
+          </div>
+        </div>
+      )}
 
       <button type="submit" className="signUpBtn">Sign up</button>
 

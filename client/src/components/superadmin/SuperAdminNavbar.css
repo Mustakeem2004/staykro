@@ -32,3 +32,19 @@
   color: white;
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+  .adminNavbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  .adminNavbar .navLinks {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+  .adminNavbar .logoutBtn {
+    width: 100%;
+  }
+}

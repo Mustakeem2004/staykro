@@ -3,6 +3,7 @@ import { SearchContext } from "../../context/SearchContext";
 import "./PaymentPage.css";
 import HotelCard from "../HotelCard";
 import API_BASE_URL from "../../config/api";
+import { toast } from 'react-toastify';
 
 const PaymentPage = () => {
   const { city, people, checkIn, checkOut, setBookings, bookings } =
@@ -33,7 +34,7 @@ const PaymentPage = () => {
 
   const handlePayment = async () => {
     if (!total) {
-      alert("Please select valid booking details!");
+      toast.success("Please select valid booking details!");
       return;
     }
 
@@ -43,7 +44,7 @@ const PaymentPage = () => {
       "https://checkout.razorpay.com/v1/checkout.js"
     );
     if (!res) {
-      alert("Razorpay SDK failed to load. Are you online?");
+      toast.error("Razorpay SDK failed to load. Are you online?");
       setLoading(false);
       return;
     }
@@ -63,7 +64,7 @@ const PaymentPage = () => {
       description: `Booking for ${city}`,
       order_id: orderData.id,
       handler: function (response) {
-        alert("Payment Successful!");
+        toast.success("Payment Successful!");
         // console.log("Payment details:", response);
 
         // ✅ Save booking to context
