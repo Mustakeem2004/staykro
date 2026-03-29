@@ -6,7 +6,7 @@
 
 /* Hero */
 .hero {
-  background: url('/images/hero-bg.jpg') center/cover no-repeat;
+  background: url('../../assets/bannerimages/lake.jpeg') center/cover no-repeat;
   color: black;
   text-align: center;
   padding: 120px 20px;

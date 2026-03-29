@@ -27,7 +27,7 @@ const getHotelsByCity = async (req, res) => {
         starRating: 1,
         thumbnail: 1,
       }
-    ); // select only necessary fields
+    ).lean();// select only necessary fields
 
     res.status(200).json({ success: true, hotels });
   } catch (error) {

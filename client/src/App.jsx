@@ -1,27 +1,28 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import API_BASE_URL from "./config/api";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Home from "./components/Pages/Home";
-import About from "./components/Pages/About";
-import Contact from "./components/Pages/Contact";
-import Signup from "./components/Pages/Signup";
-import Login from "./components/Pages/Login";
-import AuthSuccess from "./components/Pages/AuthSuccess";
-import Bookings from "./components/Pages/Bookings";
-import HotelDetails from "./components/HotelDetails";
-import HotelList from "./components/HotelList";
-import NotFound from "./components/Pages/Notfound";
-import Cart from "./components/Cart";
-import PaymentPage from "./components/Pages/PaymentPage";
+
+const Home = lazy(() => import("./components/Pages/Home"));
+const About = lazy(() => import("./components/Pages/About"));
+const Contact = lazy(() => import("./components/Pages/Contact"));
+const Signup = lazy(() => import("./components/Pages/Signup"));
+const Login = lazy(() => import("./components/Pages/Login"));
+const AuthSuccess = lazy(() => import("./components/Pages/AuthSuccess"));
+const Bookings = lazy(() => import("./components/Pages/Bookings"));
+const HotelDetails = lazy(() => import("./components/HotelDetails"));
+const HotelList = lazy(() => import("./components/HotelList"));
+const NotFound = lazy(() => import("./components/Pages/Notfound"));
+const Cart = lazy(() => import("./components/Cart"));
+const PaymentPage = lazy(() => import("./components/Pages/PaymentPage"));
 
 import AdminNavBar from "./components/admin/AdminNavbar";
-import AdminHotelList from "./components/admin/AdminHotelList";
-import EditHotelForm from "./components/admin/EditHotelForm";
-import AddHotelForm from "./components/admin/AddHotelForm";
-import AdminHotelDetails from "./components/admin/AdminHotelDetails";
+const AdminHotelList = lazy(() => import("./components/admin/AdminHotelList"));
+const EditHotelForm = lazy(() => import("./components/admin/EditHotelForm"));
+const AddHotelForm = lazy(() => import("./components/admin/AddHotelForm"));
+const AdminHotelDetails = lazy(() => import("./components/admin/AdminHotelDetails"));
 
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
@@ -29,12 +30,12 @@ import { SearchProvider } from "./context/SearchContext";
 import { HotelProvider } from "./context/HotelContext";
 import ScrollToTop from "./components/ScrollToTop";
 
-import SuperAdminHotelCard from "./components/superadmin/SuperAdminHotelCard";
-import SuperAdminHotelList from "./components/superadmin/SuperAdminHotelList";
-import SuperAdminAddHotelForm from  "./components/superadmin/SuperAdminAddHotelForm";
-import SuperAdminEditHotelForm from "./components/superadmin/SuperAdminEditHotelForm";
+const SuperAdminHotelCard = lazy(() => import("./components/superadmin/SuperAdminHotelCard"));
+const SuperAdminHotelList = lazy(() => import("./components/superadmin/SuperAdminHotelList"));
+const SuperAdminAddHotelForm = lazy(() => import("./components/superadmin/SuperAdminAddHotelForm"));
+const SuperAdminEditHotelForm = lazy(() => import("./components/superadmin/SuperAdminEditHotelForm"));
 import SuperAdminNavBar from "./components/superadmin/SuperAdminNavbar";
-import SuperAdminHotelDetails from "./components/superadmin/SuperAdminHotelDetails";
+const SuperAdminHotelDetails = lazy(() => import("./components/superadmin/SuperAdminHotelDetails"));
 import { use } from "react";
 
 function App() {
@@ -103,6 +104,7 @@ function AppContent() {
       {role === "guest" && <Navbar />}
 
     
+      <Suspense fallback={<div style={{ textAlign: "center", marginTop: "100px" }}><h2>Loading...</h2></div>}>
       <Routes>
         {/* Public/User routes */}
         
@@ -149,6 +151,7 @@ function AppContent() {
         
         <Route path="*" element={<NotFound />} />
       </Routes>
+      </Suspense>
 
 
       <Footer />

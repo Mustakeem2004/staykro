@@ -36,7 +36,11 @@ const hotelSchema = new mongoose.Schema(
     addedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     status: { type: String, default: "active" },
   },
+
   { timestamps: true }
 );
+
+// Add index on city for faster city-based queries
+hotelSchema.index({ city: 1 });
 
 module.exports = mongoose.model("Hotel", hotelSchema);
