@@ -11,8 +11,8 @@
     justify-content: center;
     border-radius: 20px;
     border: 1px solid rgba(0,0,0,0.2);
-    width: 980px;
-
+    width: 90%;
+    max-width: 980px;
 }
 
 
@@ -100,13 +100,32 @@
   background-color: #333;
 }
 
+@media (max-width: 1024px) {
+    .input_container {
+        flex-wrap: wrap;
+    }
+}
 
-
-
-
-
-
-
-
-
-
+@media (max-width: 768px) {
+    .input_container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 15px;
+        border-radius: 15px;
+        gap: 15px;
+    }
+    .card {
+        width: 100%;
+    }
+    .card input, .card select {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .input_container button,
+    .input_container input[type="button"],
+    .explore_btn {
+        grid-column: 1 / -1;
+        width: 100%;
+        margin-top: 10px;
+    }
+}

@@ -10,6 +10,7 @@ import "./HotelDetails.css";
 import RoomImageModal from "./admin/RoomImageModal";
 import API_BASE_URL from "../config/api";
 import { toast } from 'react-toastify';
+import HotelDetailsSkeleton from "./HotelDetailsSkeleton";
 
 const HotelDetails = () => {
   const { id } = useParams();
@@ -80,7 +81,7 @@ const [selectedRoom, setSelectedRoom] = useState(null); // <-- ADD THIS
   }, [id]);
 
   // ✅ Loading / error states
-  if (loading) return <p className="loading">Loading hotel details...</p>;
+  if (loading) return <HotelDetailsSkeleton />;
   if (error) return <p className="error">{error}</p>;
   if (!hotel) return <p className="error">Hotel not found.</p>;
 

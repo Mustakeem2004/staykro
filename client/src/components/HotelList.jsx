@@ -4,6 +4,7 @@ import Filters from "./Filters";
 import HotelCard from "./HotelCard";
 import SearchBar from "./SearchBar";
 import "./HotelList.css";
+import HotelCardSkeleton from "./HotelCardSkeleton";
 import filterIcon from "./filter.png";
 import { HotelContext } from "../context/HotelContext";
 import API_BASE_URL from "../config/api";
@@ -181,9 +182,11 @@ const HotelList = () => {
             </h4>
           </div>
 
-          <div>
+          <div style={{ width: "100%" }}>
             {loading ? (
-              <p>Loading hotels...</p>
+              <div style={{ width: "100%" }}>
+                {[1, 2, 3, 4].map((n) => <HotelCardSkeleton key={n} />)}
+              </div>
             ) : error ? (
               <p style={{ color: "red" }}>{error}</p>
             ) : filteredHotels.length > 0 ? (
