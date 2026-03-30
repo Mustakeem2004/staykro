@@ -149,22 +149,19 @@ const HotelList = () => {
 
   // ✅ Render
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
       <SearchBar />
 
-      <div
-        style={{
-          display: "flex",
-          gap: "20px",
-          width: "100%",
-          maxWidth: "1000px",
-        }}
-      >
+      <div className="results-content-wrapper">
         {/* Filters Sidebar */}
         <div
           ref={filterDataRef}
           className={`filters-wrapper ${showFilters ? "show" : ""}`}
         >
+          <div className="mobile-filter-header">
+             <h2>Filters</h2>
+             <button className="close-filters-btn" onClick={() => setShowFilters(false)}>&times;</button>
+          </div>
           <Filters onFilterChange={handleFilterChange} />
         </div>
 
@@ -182,7 +179,7 @@ const HotelList = () => {
             </h4>
           </div>
 
-          <div className="hotels-container" style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <div className="hotels-container" style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "stretch" }}>
             {loading ? (
               <>
                 {[1, 2, 3, 4].map((n) => <HotelCardSkeleton key={n} />)}

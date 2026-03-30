@@ -22,7 +22,7 @@ const Filters = ({ onFilterChange }) => {
 
   const handleChange = (key, value) => {
     const newFilters = { ...filters, [key]: value };
-    
+
     setFilters(newFilters);
     onFilterChange(newFilters);
 
@@ -46,7 +46,7 @@ const Filters = ({ onFilterChange }) => {
 
         <div>
           {/* <h4 style={{ margin: "0px", fontWeight: "normal" }}>MaxPrice </h4> */}
-          <h4 style={{ margin: "0px", fontWeight: "normal" }}>₹{filters.maxPrice === 20000 ? "20000+" :filters.maxPrice}
+          <h4 style={{ margin: "0px", fontWeight: "normal" }}>₹{filters.maxPrice === 20000 ? "20000+" : filters.maxPrice}
           </h4>
 
 

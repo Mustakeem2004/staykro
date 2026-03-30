@@ -167,7 +167,7 @@ const HotelCard = forwardRef(({ hotel }, ref) => {
       />
 
       {/* Hotel Details */}
-      <div className="cardData" style={{ width: "400px" }}>
+      <div className="cardData" style={{ flex: 1 }}>
         <h2 style={{ padding: 0, margin: 0 }}>
           {hotel.hotelName || hotel.name || "Unnamed Hotel"}
         </h2>
@@ -176,22 +176,25 @@ const HotelCard = forwardRef(({ hotel }, ref) => {
           {hotel.address || "No address available"}
         </p>
 
-        <p>
-          <strong>
-            ₹{hotel.basePricePerNight || hotel.price || hotel.pricePerNight}
-          </strong>{" "}
-          / night
-        </p>
+        <div className="card-footer">
+          <p>
+            <strong>
+              ₹{hotel.basePricePerNight || hotel.price || hotel.pricePerNight}
+            </strong>{" "}
+            / night
+          </p>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            width: "100%",
-          }}
-        >
-          {/* See availability button remains unchanged */}
+          <div className="rating-badge">
+            <span>{hotel.rating || hotel.starRating || "N/A"}</span>
+            <img
+              style={{ height: "10px", filter: "invert(1)" }}
+              src={starRating}
+              alt="star"
+            />
+          </div>
+        </div>
+
+        <div>
           <button
             onClick={() =>
               navigate(
@@ -211,28 +214,6 @@ const HotelCard = forwardRef(({ hotel }, ref) => {
           >
             See Details
           </button>
-
-          {/* Rating */}
-          <div
-            style={{
-              backgroundColor: "green",
-              padding: "0px 5px",
-              borderRadius: "5px",
-              color: "white",
-              display: "flex",
-              alignItems: "center",
-              gap: "2px",
-            }}
-          >
-            <p style={{ margin: 0, fontSize: "12px", padding: "5px 2px" }}>
-              {hotel.rating || hotel.starRating || "N/A"}
-            </p>
-            <img
-              style={{ height: "10px", filter: "invert(1)" }}
-              src={starRating}
-              alt="star"
-            />
-          </div>
         </div>
       </div>
     </div>

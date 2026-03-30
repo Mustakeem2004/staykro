@@ -141,13 +141,13 @@ const changeToggleNav = () => {
               />
               {dropdownOpen && (
                 <div className="dropdown" ref={dropdownRef}>
-                  <div className="dropdown-header">
+                  <div className="dropdown-header user-info-header">
                     <svg viewBox="0 0 24 24" width="18" height="18" stroke="#003b95" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                    <span style={{ fontWeight: "bold", fontSize: "14px", color:"#333" }}>{user.name}</span>
+                    <span className="user-name">{user.name}</span>
                   </div>
-                  <div className="dropdown-header" style={{ color: "#666" }}>
+                  <div className="dropdown-header email-info-header">
                     <svg viewBox="0 0 24 24" width="16" height="16" stroke="#666" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                    <span>{user.email}</span>
+                    <span className="user-email">{user.email}</span>
                   </div>
                   
                   <hr className="dropdown-divider" />
