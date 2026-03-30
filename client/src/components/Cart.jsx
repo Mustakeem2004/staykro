@@ -3,6 +3,8 @@ import { CartContext } from "../context/CartContext";
 import HotelCard from "./HotelCard";
 import API_BASE_URL from "../config/api";
 import "./Cart.css";
+import HotelCardSkeleton from "./HotelCardSkeleton";
+
 const Cart = () => {
   const { cartItems, removeFromCart } = useContext(CartContext);
   const [hotelsData, setHotelsData] = useState([]);
@@ -51,40 +53,45 @@ const Cart = () => {
     hotel._id || hotel.id || (hotel.hotelId && hotel.hotelId._id);
 
   return (
-<div className="cart-list" style={{ minHeight: "60vh", padding: "20px" }}>
-  
-  {loading && (
-    <div style={{ textAlign: "center", marginTop: "80px" }}>
-      <h2>Loading your cart...</h2>
-    </div>
-  )}
+    <div className="cart-container">
+      <div className="cart-list">
+        {loading && (
+          <div className="cart-skeletons">
+            {[1, 2, 3].map((n) => (
+              <div key={n} className="cart-item">
+                <HotelCardSkeleton />
+              </div>
+            ))}
+          </div>
+        )}
 
-  {!loading && hotelsData.length === 0 && (
-    <div style={{ textAlign: "center", marginTop: "80px", width: "100%" }}>
-      <h2 style={{ fontSize: "2rem", color: "#333", marginBottom: "15px" }}>No items in the cart yet 🧳</h2>
-      <p style={{ fontSize: "1.1rem", color: "#666" }}>Looks like you haven't added any hotels to your bookings yet.</p>
-    </div>
-  )}
+        {!loading && hotelsData.length === 0 && (
+          <div style={{ textAlign: "center", marginTop: "80px", width: "100%" }}>
+            <h2 style={{ fontSize: "2rem", color: "#333", marginBottom: "15px" }}>No items in the cart yet 🧳</h2>
+            <p style={{ fontSize: "1.1rem", color: "#666" }}>Looks like you haven't added any hotels to your bookings yet.</p>
+          </div>
+        )}
 
-  {!loading && hotelsData.map((hotel, index) => (
-    <div key={hotel._id || index} className="cart-item">
-      
-      <div className="cart-header">
-        <button
-          onClick={() => removeFromCart(getHotelId(hotel))}
-          className="remove-btn"
-        >
-          Remove
-        </button>
+        {!loading && hotelsData.map((hotel, index) => (
+          <div key={hotel._id || index} className="cart-item">
+            
+            <div className="cart-header">
+              <button
+                onClick={() => removeFromCart(getHotelId(hotel))}
+                className="remove-btn"
+              >
+                Remove
+              </button>
+            </div>
+
+            <div className="cart-card-wrapper">
+              <HotelCard hotel={hotel} />
+            </div>
+
+          </div>
+        ))}
       </div>
-
-      <div className="cart-card-wrapper">
-        <HotelCard hotel={hotel} />
-      </div>
-
     </div>
-  ))}
-</div>
 
 
 

@@ -172,24 +172,18 @@ const changeToggleNav = () => {
         </div>
 
         {/* Cart Icon */}
-        <div>
+        <div className="nav-cart-container">
           <Link to="/cart">
             <img src={trolley} className="cart-icon" alt="cart" />
+            {cartCount > 0 && (
+              <span className='cartCount'>{cartCount}</span>
+            )}
           </Link>
         </div>
-        <div style={{ position: "relative" }}>
-          {cartCount > 0 && (
-            <span
-              className='cartCount'
-            >
-              {cartCount}
-            </span>
-            
-          )}
-<div onClick={changeToggleNav} ref={tripleIconRef}>
-  <img style={{cursor:"pointer"}} className='triple' src={lineIcon} alt="" />
-</div>
 
+        {/* Hamburger Menu Icon */}
+        <div onClick={changeToggleNav} ref={tripleIconRef}>
+          <img style={{cursor:"pointer"}} className='triple' src={lineIcon} alt="menu" />
         </div>
 
       </div>

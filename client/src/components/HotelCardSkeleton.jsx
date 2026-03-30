@@ -2,20 +2,7 @@ import React from 'react';
 
 const HotelCardSkeleton = () => {
   return (
-    <div
-      style={{
-        border: "1px solid #ddd",
-        borderRadius: "10px",
-        marginBottom: "20px",
-        padding: "15px",
-        display: "flex",
-        gap: "13px",
-        width: "100%",
-        maxWidth: "800px",
-        backgroundColor: "#fff",
-        animation: "pulse 1.5s infinite ease-in-out"
-      }}
-    >
+    <div className="hotel-card-skeleton">
       <style>
         {`
           @keyframes pulse {
@@ -27,19 +14,39 @@ const HotelCardSkeleton = () => {
             background-color: #e0e0e0;
             border-radius: 5px;
           }
+          .hotel-card-skeleton {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            display: flex;
+            gap: 13px;
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            animation: pulse 1.5s infinite ease-in-out;
+          }
+          .skeleton-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            flex-shrink: 0;
+          }
+          @media (max-width: 768px) {
+            .hotel-card-skeleton {
+              flex-direction: column;
+              padding: 10px;
+            }
+            .skeleton-image {
+              width: 100%;
+              height: 180px;
+            }
+          }
         `}
       </style>
       
       {/* Image Skeleton */}
-      <div 
-        className="skeleton-box" 
-        style={{ 
-          width: "200px", 
-          height: "200px", 
-          borderRadius: "10px",
-          flexShrink: 0
-        }}
-      ></div>
+      <div className="skeleton-box skeleton-image"></div>
 
       {/* Details Skeleton */}
       <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "15px", justifyContent: "center" }}>

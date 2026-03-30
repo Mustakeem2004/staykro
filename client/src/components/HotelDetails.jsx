@@ -11,6 +11,7 @@ import RoomImageModal from "./admin/RoomImageModal";
 import API_BASE_URL from "../config/api";
 import { toast } from 'react-toastify';
 import HotelDetailsSkeleton from "./HotelDetailsSkeleton";
+import { useRef } from "react";
 
 const HotelDetails = () => {
   const { id } = useParams();
@@ -18,14 +19,17 @@ const HotelDetails = () => {
 
   const { cache, saveHotelsToCache } = useContext(HotelContext);
   const { addToCart } = useContext(CartContext);
-  const { checkIn, checkOut } = useContext(SearchContext);
+  const { checkIn, checkOut, people } = useContext(SearchContext);
   const { user } = useContext(AuthContext);
 
 const [hotel, setHotel] = useState(null);
 const [loading, setLoading] = useState(true);
 const [error, setError] = useState(null);
-const [selectedRoom, setSelectedRoom] = useState(null); // <-- ADD THIS
+const [selectedRoom, setSelectedRoom] = useState(null);
+const [isAdding, setIsAdding] = useState(false); // ✅ Added for button state
 
+
+  const searchBarRef = useRef(null); // ✅ Ref for SearchBar
 
   // ✅ Fetch hotel details
   const fetchHotelDetails = async () => {
@@ -107,8 +111,10 @@ if (hotel.images && hotel.images.length > 0) {
 
   // ✅ Handle Booking
   const handlePayment = () => {
-    if (!checkIn || !checkOut) {
-      toast.error("Please select check-in and check-out dates first.");
+    if (!checkIn || !checkOut || !people || people === 0) {
+      toast.error("Please provide check-in, check-out dates, and number of guests.");
+      // ✅ Smooth scroll to search bar
+      searchBarRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
     if (!user) {
@@ -120,6 +126,11 @@ if (hotel.images && hotel.images.length > 0) {
 
   return (
     <div className="hotel-details-container">
+      {/* SearchBar Wrapper with Ref */}
+      <div ref={searchBarRef} style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+        <SearchBar />
+      </div>
+
       {/* ✅ Gallery Section */}
       {galleryPhotos.length > 0 && <HotelGallery photos={galleryPhotos} />}
 
@@ -136,8 +147,16 @@ if (hotel.images && hotel.images.length > 0) {
 
           <div className="hotel-price">
             <h2>₹{hotel.pricePerNight} / night</h2>
-            <button className="addtocart" onClick={() => addToCart(hotel.id)}>
-              🛒 Add to Cart
+            <button 
+              className={`addtocart ${isAdding ? "loading" : ""}`} 
+              onClick={async () => {
+                setIsAdding(true);
+                await addToCart(hotel.id);
+                setIsAdding(false);
+              }}
+              disabled={isAdding}
+            >
+              {isAdding ? "⏳ Adding..." : "🛒 Add to Cart"}
             </button>
           </div>
         </div>

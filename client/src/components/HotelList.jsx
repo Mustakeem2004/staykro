@@ -41,12 +41,12 @@ const HotelList = () => {
         setHotels(cache[city]);
         // console.log(hotels);
         // console.log(hotels);
-        
+
         setLoading(false);
         return;
       }
 
-      const res = await fetch(`${API_BASE_URL}/api/user/hotelList/city/${city}`); 
+      const res = await fetch(`${API_BASE_URL}/api/user/hotelList/city/${city}`);
       if (!res.ok) throw new Error(`Server responded with ${res.status}`);
 
       const data = await res.json();
@@ -65,7 +65,7 @@ const HotelList = () => {
         hotelsArray = [data.hotel];
       }
 
-      
+
 
       // ✅ Map to a clean hotel object format
       const hotelsList = hotelsArray.map((hotel) => ({
@@ -73,18 +73,18 @@ const HotelList = () => {
         hotelName: hotel.name || hotel.hotelName || "Unnamed Hotel",
         city: hotel.city || city,
         address: hotel.address || "No address provided",
-        price: hotel.basePricePerNight  || hotel.pricePerNight ||  0,
+        price: hotel.basePricePerNight || hotel.pricePerNight || 0,
         rating: hotel.starRating || 0,
         image: hotel.thumbnail || (hotel.images && hotel.images[0]) || "",
       }));
-      
+
 
       setHotels(hotelsList);
       saveHotelsToCache(city, hotelsList);
 
-       
 
-      
+
+
     } catch (err) {
       console.error("Error fetching hotels:", err);
       setError("Failed to fetch hotels. Try again later.");
@@ -182,11 +182,11 @@ const HotelList = () => {
             </h4>
           </div>
 
-          <div style={{ width: "100%" }}>
+          <div className="hotels-container" style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
             {loading ? (
-              <div style={{ width: "100%" }}>
+              <>
                 {[1, 2, 3, 4].map((n) => <HotelCardSkeleton key={n} />)}
-              </div>
+              </>
             ) : error ? (
               <p style={{ color: "red" }}>{error}</p>
             ) : filteredHotels.length > 0 ? (

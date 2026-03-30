@@ -142,8 +142,8 @@ const HotelCard = forwardRef(({ hotel }, ref) => {
   const handleError = () => {
     setImgSrc("https://via.placeholder.com/400x250?text=No+Image");
   };
-  
-  
+
+
 
   return (
     <div
@@ -161,7 +161,7 @@ const HotelCard = forwardRef(({ hotel }, ref) => {
       {/* Hotel Image */}
       <img
         src={imgSrc}
-        alt={hotel.hotelName ||  "Hotel"}
+        alt={hotel.hotelName || "Hotel"}
         className="cardImage"
         onError={handleError}
       />

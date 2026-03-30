@@ -1,106 +1,236 @@
+/* PaymentPage.css - Premium Overhaul */
+
+.payment-page-wrapper {
+  background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+  min-height: calc(100vh - 70px);
+  padding: 40px 20px;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
 .payment-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+/* Loading State */
+.payment-loading {
+  height: 60vh;
   display: flex;
-  gap: 2rem;
-  padding: 2rem;
-  max-width: 1000px;
-  margin: 2rem auto;
-  font-family: "Poppins", sans-serif;
-}
-
-.summary-section,
-.payment-section {
-  flex: 1;
-  background: #fff;
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-}
-
-h2 {
-  margin-bottom: 1rem;
-  /* color: #2b2b2b; */
-}
-
-.summary-card p {
-  margin: 0.5rem 0;
-  color: #444;
-}
-
-.summary-card hr {
-  margin: 1rem 0;
-  border: none;
-  border-top: 1px solid #ddd;
-}
-
-.total {
+  justify-content: center;
+  align-items: center;
   font-size: 1.2rem;
-  color: #111;
-}
-
-.method-selector {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.method-selector button {
-  flex: 1;
-  padding: 0.8rem;
-  border: 2px solid #ddd;
-  background: #f9f9f9;
-  border-radius: 8px;
-  cursor: pointer;
   font-weight: 500;
-  transition: 0.3s;
+  color: #003b95;
 }
 
-.method-selector button.active {
-  border-color: #0077ff;
-  background: #e6f1ff;
-  color: #0077ff;
+/* Left Section: Booking Details */
+.booking-details-section {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.card-form input,
-.upi-form input {
-  width: 100%;
-  padding: 0.8rem;
-  margin-bottom: 1rem;
-  border: 1.5px solid #ccc;
-  border-radius: 8px;
-  font-size: 1rem;
+.booking-details-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  color: #102a43;
+  font-weight: 700;
 }
 
-.row {
+/* Hotel Summary Card */
+.hotel-summary-card {
   display: flex;
-  gap: 1rem;
+  gap: 20px;
+  background: white;
+  padding: 15px;
+  border-radius: 16px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
-.pay-btn {
-  width: 100%;
-  padding: 1rem;
-  background: linear-gradient(135deg, #0077ff, #005dd1);
-  border: none;
+.hotel-preview-img {
+  width: 140px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.hotel-text-info h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.3rem;
+  color: #003b95;
+}
+
+.hotel-loc {
+  color: #627d98;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+.booking-tags {
+  display: flex;
+  gap: 10px;
+}
+
+.booking-tags span {
+  background: #f0f4f8;
+  color: #334e68;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Date Pills */
+.dates-pill-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px dashed #bcccdc;
+}
+
+.date-pill {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.date-pill label {
+  font-size: 0.8rem;
+  color: #627d98;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+.date-pill strong {
+  font-size: 1.1rem;
+  color: #102a43;
+}
+
+.arrow-icon {
+  color: #003b95;
+  font-size: 1.5rem;
+  opacity: 0.5;
+}
+
+/* Right Section: Sidebar */
+.price-summary-sidebar {
+  background: #102a43;
+  color: white;
+  padding: 30px;
+  border-radius: 24px;
+  box-shadow: 0 15px 35px rgba(16, 42, 67, 0.2);
+  position: sticky;
+  top: 100px;
+}
+
+.price-summary-sidebar h3 {
+  font-size: 1.4rem;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.total-row {
+  opacity: 1;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-top: 15px;
   color: #fff;
-  font-weight: bold;
-  border-radius: 10px;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 20px 0;
+}
+
+.premium-pay-btn {
+  width: 100%;
+  padding: 16px;
+  background: #003b95;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 1.1rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border: 1.5px solid rgba(255,255,255,0.1);
 }
 
-.pay-btn:hover {
-  transform: scale(1.03);
-  background: linear-gradient(135deg, #005dd1, #0044aa);
+.premium-pay-btn:hover:not(:disabled) {
+  background: #004dc4;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
-@media (max-width: 768px) {
+.premium-pay-btn:active {
+  transform: translateY(0);
+}
+
+.premium-pay-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.secure-text {
+  text-align: center;
+  font-size: 0.85rem;
+  margin-top: 20px;
+  opacity: 0.6;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
   .payment-container {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+  }
+  
+  .price-summary-sidebar {
+    position: static;
   }
 }
 
-
-.pay-btn:hover {
-  transform: scale(1.03);
-  background: linear-gradient(135deg, #005dd1, #0044aa);
+@media (max-width: 600px) {
+  .hotel-summary-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .hotel-preview-img {
+    width: 100%;
+    height: 180px;
+  }
+  
+  .dates-pill-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .arrow-icon {
+    transform: rotate(90deg);
+  }
 }
-
